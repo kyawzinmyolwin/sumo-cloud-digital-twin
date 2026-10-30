@@ -1,0 +1,7 @@
+# Test / CI dependencies — NOT needed at runtime (the runtime deps are in
+# requirements.txt). The modules under test import their heavy runtime deps
+# (websockets, pyproj, sumolib, influxdb-client) lazily, inside functions, so
+# the unit tests run without them — only these are required to run the suites.
+pytest>=8.0
+boto3>=1.34          # the etl/ modules under test import boto3 at module load
+moto>=5.0            # mocks AWS (S3 + Secrets Manager) for the etl Lambda tests

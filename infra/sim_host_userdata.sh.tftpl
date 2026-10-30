@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+export DEBIAN_FRONTEND=noninteractive
+
+# SUMO via the official PPA (fast, recent)
+apt-get update
+apt-get install -y software-properties-common git python3-venv
+add-apt-repository -y ppa:sumo/stable
+apt-get update
+apt-get install -y sumo sumo-tools
+
+# Get the code (public repo). Check out the requested ref (branch/tag/commit) so
+# the box runs the same code as your working branch — default is the repo default
+# branch (main). Set var.sim_host_git_ref to demo from a feature branch.
+cd /opt
+git clone https://github.com/kyawzinmyolwin/sumo-cloud-digital-twin.git
+cd sumo-cloud-digital-twin
+git checkout "${git_ref}"
+cd smart_city_digital_twin
+
+# Python venv + deps
+python3 -m venv .venv
+./.venv/bin/pip install -r 2D_simulation/requirements.txt
+
+# Scenario args live in an env file the control Lambda rewrites via SSM to switch
+# scenarios (then restarts the service). $SCENARIO_ARGS is split on whitespace by
+# systemd into separate arguments. Default = the calibrated morning baseline.
+cat > /etc/sumo-emitter.env <<'ENVF'
+SCENARIO_ARGS=--real-time --speed 5 --jump-to 23400 --end 27000 --scenario-id baseline_am
+ENVF
+
+# Run the emitter as a service, forwarding to the cloud API Gateway.
+# Quoted heredoc ('UNIT') so bash does NOT expand $SCENARIO_ARGS (a systemd var,
+# expanded at service runtime). ${ws_url} is substituted earlier by Terraform
+# templatefile, not bash, so quoting the heredoc does not affect it.
+cat > /etc/systemd/system/sumo-emitter.service <<'UNIT'
+[Unit]
+Description=SUMO producer -> API Gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Environment=SUMO_HOME=/usr/share/sumo
+EnvironmentFile=-/etc/sumo-emitter.env
+WorkingDirectory=/opt/sumo-cloud-digital-twin/smart_city_digital_twin/2D_simulation
+ExecStart=/opt/sumo-cloud-digital-twin/smart_city_digital_twin/.venv/bin/python scripts/run_traci.py --no-gui --emit-interval 10 --emit-target "${ws_url}" $SCENARIO_ARGS
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+
+systemctl daemon-reload
+systemctl enable --now sumo-emitter.service

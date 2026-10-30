@@ -1,0 +1,10 @@
+# Copy to backend.hcl and fill in YOUR values, then:
+#   terraform init -backend-config=backend.hcl
+# These name the S3 bucket + DynamoDB lock table you created by hand during
+# bootstrap (see README.md). backend.hcl itself is gitignored.
+
+bucket = "christchurch-twin-tfstate-kzml7"
+key            = "christchurch-digital-twin/prod/terraform.tfstate"
+region         = "ap-southeast-2"
+dynamodb_table = "tf-state-lock"
+encrypt        = true

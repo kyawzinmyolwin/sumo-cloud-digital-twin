@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Low-traffic FLOW test scenario: a steady trickle (~a few vehicles at a
+     time) along 3 real routes for 6 min of sim time, so the dashboard stays
+     populated. Pair with the run_traci real-time flag to watch in wall-clock time.
+     Generated from scenarios/low_traffic.rou.xml, not hand-edited. -->
+<routes>
+    <vType id="car" vClass="passenger" />
+    <route id="r0" edges="-1368153905 902156803 902156801#1 902156786#1 26600479#0 335813776#3 823329197#0 646364260#1 1015751047 1015751048#0 1238158274#1 701030406 807003661 597576896#0 597576896#1 597576896#2 139484443" />
+    <route id="r1" edges="-139811056#1 26701176 777634276 1015754937#0 139810525#1 1015728529 770109405#0 116420557#1 512130749#0 32841811#1 981884343#0 657468210#1 1015728526#0 436516893#1 700830261#0 1238158274#1 701030406 807003661 597576896#0 597576896#1 597576896#2 139484443" />
+    <route id="r2" edges="-139811056#1 26701176 777634276 1015754937#0 139810525#1 1015728529 770109405#0 116420557#1 512130749#0 32841811#1 981884343#0 657468210#1 1015728526#0 436516893#1 700830261#0 1238158274#1 701030406 807003661 597576896#0 597576896#1 597576896#2 139484443" />
+    <flow id="f0" type="car" route="r0" begin="23400" end="23760" period="45" />
+    <flow id="f1" type="car" route="r1" begin="23400" end="23760" period="45" />
+    <flow id="f2" type="car" route="r2" begin="23400" end="23760" period="45" />
+</routes>

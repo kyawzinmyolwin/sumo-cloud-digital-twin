@@ -1,0 +1,462 @@
+edge,street_name,intersection_id,intersection_streets,role,dist_m
+1015728522#0,Durham Street South,I2853,Durham South / St Asaph,candidate,2.61
+1015728525#0,Colombo Street,I2968,Colombo / Tuam,nearest,0.10
+1015728526#0,Tuam Street,I2968,Colombo / Tuam,candidate,0.82
+1015728527#0,Durham Street South,I2850,Durham South / Tuam,candidate,0.80
+1015728528#0,Tuam Street,I2728,Montreal / Tuam,candidate,0.61
+1015728530#0,Saint Asaph Street,I2727,Montreal / St Asaph,candidate,2.64
+1015728531#1,Saint Asaph Street,I2727,Montreal / St Asaph,nearest,0.40
+1015728533#1,Saint Asaph Street,I2611,Antigua / St Asaph,nearest,0.22
+1015728534#0,Saint Asaph Street,I2611,Antigua / St Asaph,candidate,2.00
+1015751048#0,Saint Asaph Street,I2970,Colombo / St Asaph,enter,0.25
+1015754936#0,Moorhouse Avenue,I2727,Montreal / St Asaph,enter,0.40
+1015754936#0,Moorhouse Avenue,I2731,Montreal / Moorhouse,candidate,0.87
+1015754937#0,Moorhouse Avenue,I2731,Montreal / Moorhouse,candidate,0.88
+1015756825#0,Moorhouse Avenue,I2629,Antigua / Moorhouse,enter,0.24
+1015756826#0,Moorhouse Avenue,I2731,Montreal / Moorhouse,enter,0.19
+1015756826#0,Moorhouse Avenue,I2629,Antigua / Moorhouse,candidate,1.05
+101766955,Fitzgerald Avenue,I3484,Avonside / Fitzgerald / Kilmore,nearest,0.11
+1018469846,Moorhouse Avenue,I3325,Barbadoes / Moorhouse / Waltham,candidate,0.18
+1018478674#0,Pilgrim Place,I3112,Manchester / Moorhouse / Pilgrim,enter,0.70
+1018478675#1,Manchester Street,I3112,Manchester / Moorhouse / Pilgrim,nearest,0.70
+1018478676#1,Moorhouse Avenue,I3112,Manchester / Moorhouse / Pilgrim,candidate,1.38
+1018480659,Moorhouse Avenue,I2976,Colombo / Moorhouse,candidate,1.09
+1018480661,Moorhouse Avenue,I2976,Colombo / Moorhouse,enter,0.33
+1018636799#0,Fitzgerald Avenue,I3494,Ferry / Fitzgerald,candidate,0.09
+1025115104,Salisbury Street,I2621,Hagley / Park / Salisbury,candidate,25.15
+1025115106,Park Terrace,I2621,Hagley / Park / Salisbury,candidate,3.94
+1025115107,Park Terrace,I2621,Hagley / Park / Salisbury,candidate,14.76
+103089507#0,Bealey Avenue,I2632,Bealey / Papanui / Victoria,exit,0.76
+1056138896#0,Manchester Street,I3107,Manchester / St Asaph,candidate,3.23
+1056138897#1,Manchester Street,I3104,Manchester / Tuam,candidate,0.72
+1056154527,Madras Street,I3210,Lichfield / Madras,nearest,2.38
+1056154528#0,Cashel Street,I3208,Cashel / Madras,candidate,1.11
+1056154528#2,Cashel Street,I3208,Cashel / Madras,enter,0.17
+1056154528#2,Cashel Street,I3100,Cashel / Manchester,candidate,1.78
+1056154529#1,Madras Street,I3212,Madras / Tuam,candidate,0.65
+1056154529#1,Madras Street,I3210,Lichfield / Madras,candidate,3.80
+1056154530#0,Lichfield Street,I3210,Lichfield / Madras,candidate,3.94
+1056154531#0,Cashel Street,I3208,Cashel / Madras,exit,0.17
+1056154531#0,Cashel Street,I3100,Cashel / Manchester,candidate,1.82
+1056154533#1,Durham Street North,I2849,Armagh / Durham North,candidate,1.51
+1056154533#1,Durham Street North,I2906,Armagh / Oxford,candidate,113.14
+1056154534#0,Gloucester Street,I2832,Cambridge / Durham North / Gloucester,enter,0.42
+1056154535#0,Cambridge Terrace,I2814,Cambridge / Worcester,enter,0.31
+1056154535#0,Cambridge Terrace,I2874,Hereford / Oxford,candidate,75.10
+1056154536#0,Hereford Street,I2815,Cambridge / Hereford,candidate,2.00
+1056154537#2,Hereford Street,I2814,Cambridge / Worcester,exit,0.31
+1056154537#2,Hereford Street,I2815,Cambridge / Hereford,candidate,1.64
+1056154537#2,Hereford Street,I2874,Hereford / Oxford,candidate,34.05
+1056154540#0,Barbadoes Street,I3314,Barbadoes / Worcester,candidate,0.52
+1056154541#1,Barbadoes Street,I3315,Barbadoes / Hereford,candidate,0.26
+1056154541#1,Barbadoes Street,I3314,Barbadoes / Worcester,candidate,0.61
+1056154542#1,Worcester Street,I3314,Barbadoes / Worcester,nearest,0.01
+1056154543,Worcester Street,I3239,Latimer / Worcester,candidate,29.26
+1056154544#0,Hereford Street,I3315,Barbadoes / Hereford,nearest,0.02
+1056154546#0,Tuam Street,I3220,Barbadoes / Tuam,candidate,0.12
+1056154546#0,Tuam Street,I3320,Barbadoes / Tuam,candidate,0.12
+1056154547#0,Madras Street,I3212,Madras / Tuam,candidate,1.38
+1056154549,Manchester Street,I3154,High / Tuam,enter,0.50
+1056154549,Manchester Street,I3104,Manchester / Tuam,candidate,1.26
+1056154551,Hereford Street,I2963,Cathedral / Colombo / Hereford / High,candidate,0.67
+1056154551,Hereford Street,I2966,Cashel / Colombo,candidate,117.59
+1056154552#0,Colombo Street,I2961,Colombo / Gloucester,candidate,3.76
+1056154553#1,Gloucester Street,I3064,Gloucester / New Regent,nearest,0.10
+1056154553#1,Gloucester Street,I2961,Colombo / Gloucester,candidate,4.05
+1056154554#0,Gloucester Street,I3064,Gloucester / New Regent,candidate,46.01
+1056154554#1,Gloucester Street,I3064,Gloucester / New Regent,enter,0.10
+1064801546#1,Hereford Street,I2719,Hereford / Montreal,candidate,0.75
+1069206897#0,Montreal Street,I2731,Montreal / Moorhouse,candidate,0.32
+1071141044#0,Cambridge Terrace,I3303,Barbadoes / Salisbury,candidate,1.11
+1071178644,Peterborough Street,I3195,Madras / Salisbury,enter,0.04
+1071178644,Peterborough Street,I3200,Kilmore / Madras,exit,0.35
+1133016277#0,Colombo Street,I2966,Cashel / Colombo,nearest,0.04
+1133016277#0,Colombo Street,I2967,Colombo / Lichfield,candidate,2.85
+114501102#1,Moorhouse Avenue,I2731,Montreal / Moorhouse,candidate,0.19
+114501104#1,Moorhouse Avenue,I2976,Colombo / Moorhouse,exit,0.33
+114501117,Antigua Street,I2611,Antigua / St Asaph,enter,0.22
+114502601#2,Armagh Street,I2848,Durham North / Kilmore / Victoria,exit,0.74
+114502601#2,Armagh Street,I2906,Armagh / Oxford,exit,1.50
+114502601#2,Armagh Street,I2849,Armagh / Durham North,candidate,1.81
+114502608#1,Colombo Street,I2958,Colombo / Kilmore,candidate,0.56
+114648655#1,Bealey Avenue,I2712,Bealey / Montreal,candidate,5.99
+114648656#1,Colombo Street,I2968,Colombo / Tuam,enter,0.10
+114648656#1,Colombo Street,I2967,Colombo / Lichfield,nearest,0.24
+114648688#1,Montreal Street,I2715,Montreal / Salisbury / Victoria,candidate,2.31
+114648693#1,Victoria Street,I2715,Montreal / Salisbury / Victoria,candidate,1.58
+114648693#1,Victoria Street,I2621,Hagley / Park / Salisbury,exit,2.74
+114770261,Bealey Avenue,I3198,Bealey / Madras,nearest,0.14
+114770261,Bealey Avenue,I3304,Barbadoes / Bealey,candidate,1.00
+114770267,Gloucester Street,I2832,Cambridge / Durham North / Gloucester,nearest,0.42
+114914209#1,Tuam Street,I3154,High / Tuam,exit,0.50
+114914209#1,Tuam Street,I3104,Manchester / Tuam,nearest,0.54
+114914216#0,Lichfield Street,I3105,High / Lichfield / Manchester,candidate,2.77
+114914219,Tuam Street,I3154,High / Tuam,candidate,3.23
+1153171355#1,Fitzgerald Avenue,I3489,Fitzgerald / Hereford,enter,0.03
+1153171357#1,Fitzgerald Avenue,I3489,Fitzgerald / Hereford,nearest,0.03
+1154439732,Rolleston Avenue,I2605,Armagh / Hagley Park / Park / Rolleston,candidate,0.01
+1154439732,Rolleston Avenue,I2606,Rolleston / Worcester,exit,1.72
+116344257#1,Fitzgerald Avenue,I3494,Ferry / Fitzgerald,exit,0.01
+116350190#1,Hereford Street,I2874,Hereford / Oxford,nearest,0.22
+116419807#1,Colombo Street,I2956,Colombo / Salisbury,candidate,0.72
+116419807#1,Colombo Street,I2957,Colombo / Peterborough,candidate,1.39
+116419807#2,Colombo Street,I2958,Colombo / Kilmore,nearest,0.07
+116419807#2,Colombo Street,I2957,Colombo / Peterborough,candidate,0.14
+116419808#0,Peterborough Street,I2957,Colombo / Peterborough,candidate,1.13
+116420557#1,Montreal Street,I2727,Montreal / St Asaph,candidate,1.88
+1164963312,Armagh Street,I2906,Armagh / Oxford,candidate,1.50
+1164963312,Armagh Street,I2849,Armagh / Durham North,candidate,1.81
+1176472262#2,Fitzgerald Avenue,I3485,Fitzgerald / Gloucester,candidate,0.19
+1176472262#2,Fitzgerald Avenue,I3486,Fitzgerald / Worcester,candidate,9.50
+1176472263#2,Fitzgerald Avenue,I3486,Fitzgerald / Worcester,enter,8.56
+1176507584#1,Rolleston Avenue,I2606,Rolleston / Worcester,candidate,2.32
+117752437#1,Fitzgerald Avenue,I3485,Fitzgerald / Gloucester,candidate,0.00
+1178029178#0,Worcester Boulevard,I2718,Montreal / Worcester,candidate,0.82
+1178029178#0,Worcester Boulevard,I2814,Cambridge / Worcester,candidate,16.89
+1178029180#1,Cambridge Terrace,I2814,Cambridge / Worcester,candidate,0.31
+1189761076#2,Tuam Street,I3154,High / Tuam,candidate,0.50
+120110229#1,Fitzgerald Avenue,I3484,Avonside / Fitzgerald / Kilmore,candidate,2.89
+1235089648,High Street,I3154,High / Tuam,candidate,3.23
+1235089649,High Street,I3154,High / Tuam,candidate,3.23
+1235089650,High Street,I3212,Madras / Tuam,enter,0.66
+1238158274#1,Colombo Street,I2970,Colombo / St Asaph,candidate,2.38
+1239775827#1,Madras Street,I3200,Kilmore / Madras,nearest,0.35
+1239775827#2,Madras Street,I3195,Madras / Salisbury,candidate,0.72
+1239775828#1,Salisbury Street,I3303,Barbadoes / Salisbury,candidate,0.12
+1239775828#1,Salisbury Street,I3195,Madras / Salisbury,candidate,0.72
+1246754354,Oxford Terrace,I2906,Armagh / Oxford,candidate,9.38
+1247576361#1,Durham Street South,I2853,Durham South / St Asaph,candidate,1.16
+1248691231#2,Fitzgerald Avenue,I3494,Ferry / Fitzgerald,candidate,0.01
+1248691231#2,Fitzgerald Avenue,I3323,Barbadoes / Ferry,enter,0.07
+1248691231#2,Fitzgerald Avenue,I3497,Fitzgerald / St Asaph,candidate,0.57
+1248691231#2,Fitzgerald Avenue,I3322,Barbadoes / St Asaph,enter,0.65
+1255161073#1,Bealey Avenue,I3088,Bealey / Manchester,exit,0.09
+1255161074#0,Bealey Avenue,I2836,Bealey / Durham North,exit,0.10
+1255161074#0,Bealey Avenue,I2953,Bealey / Colombo,exit,0.49
+1255161074#1,Bealey Avenue,I2953,Bealey / Colombo,candidate,1.42
+1255161077#1,Bealey Avenue,I2632,Bealey / Papanui / Victoria,candidate,1.63
+1255161079,Kilmore Street,I2754,Cranmer / Kilmore / Montreal,candidate,34.37
+1255161082#0,Kilmore Street,I2848,Durham North / Kilmore / Victoria,candidate,3.90
+1255161082#1,Kilmore Street,I2754,Cranmer / Kilmore / Montreal,nearest,0.35
+1280080859,Colombo Street,I2968,Colombo / Tuam,candidate,1.00
+13061690#0,Armagh Street,I2605,Armagh / Hagley Park / Park / Rolleston,candidate,0.33
+1311909671#2,Madras Street,I3258,Ferry / St Asaph,exit,0.39
+1311909671#2,Madras Street,I3212,Madras / Tuam,exit,0.66
+1311909671#2,Madras Street,I3213,High / Madras / St Asaph,candidate,9.82
+1311910644#1,Ferry Road,I3258,Ferry / St Asaph,nearest,0.39
+1311910644#1,Ferry Road,I3323,Barbadoes / Ferry,candidate,1.21
+1356531822#1,Colombo Street,I2956,Colombo / Salisbury,candidate,0.65
+1356531822#1,Colombo Street,I2953,Bealey / Colombo,candidate,0.78
+1367206843,Fitzgerald Avenue,I3490,Fitzgerald / Lichfield,candidate,0.52
+1367206846,Fitzgerald Avenue,I3490,Fitzgerald / Lichfield,candidate,5.57
+1368153905,Tuam Street,I3492,Fitzgerald / Tuam,candidate,5.39
+1371935610,Fitzgerald Avenue,I3497,Fitzgerald / St Asaph,enter,0.47
+1371935610,Fitzgerald Avenue,I3492,Fitzgerald / Tuam,candidate,2.01
+1371935611#1,Fitzgerald Avenue,I3490,Fitzgerald / Lichfield,exit,0.52
+1373259080#1,Fitzgerald Avenue,I3485,Fitzgerald / Gloucester,exit,0.00
+1373281309,Armagh Street,I2605,Armagh / Hagley Park / Park / Rolleston,candidate,0.32
+1373281309,Armagh Street,I2755,Armagh / Cranmer / Montreal,exit,0.68
+1382213591#1,Lichfield Street,I3220,Barbadoes / Tuam,enter,0.12
+1382213591#1,Lichfield Street,I3320,Barbadoes / Tuam,enter,0.12
+1382213596#1,Barbadoes Street,I3220,Barbadoes / Tuam,candidate,1.31
+1382213596#1,Barbadoes Street,I3320,Barbadoes / Tuam,candidate,1.31
+1382213596#1,Barbadoes Street,I3322,Barbadoes / St Asaph,candidate,2.89
+1392244330#1,Gloucester Street,I2716,Gloucester / Montreal,candidate,0.77
+1392244330#1,Gloucester Street,I2718,Montreal / Worcester,candidate,115.41
+1394095983#0,Colombo Street,I2956,Colombo / Salisbury,exit,0.30
+1394095983#0,Colombo Street,I2953,Bealey / Colombo,candidate,0.56
+139484433#1,Montreal Street,I2728,Montreal / Tuam,enter,0.02
+1395896891#1,Manchester Street,I3100,Cashel / Manchester,candidate,1.82
+1395896894#2,Manchester Street,I3105,High / Lichfield / Manchester,candidate,2.77
+139633217#7,Barbadoes Street,I3220,Barbadoes / Tuam,candidate,1.07
+139633217#7,Barbadoes Street,I3320,Barbadoes / Tuam,candidate,1.07
+139633605,Kilmore Street,I2754,Cranmer / Kilmore / Montreal,candidate,6.28
+139633608,Oxford Terrace,I2843,Cambridge / Durham South / Lichfield / Oxford,exit,0.58
+139807680#1,Salisbury Street,I2956,Colombo / Salisbury,candidate,0.72
+139807681#1,Salisbury Street,I2840,Durham North / Salisbury,nearest,0.61
+139807681#1,Salisbury Street,I2715,Montreal / Salisbury / Victoria,exit,0.64
+139810392#0,Durham Street North,I2836,Bealey / Durham North,candidate,1.35
+139810392#1,Durham Street North,I2840,Durham North / Salisbury,candidate,0.75
+139810525#1,Montreal Street,I2727,Montreal / St Asaph,exit,0.40
+139811056#1,Durham Street South,I2859,Durham South / Moorhouse,nearest,0.03
+139811240#1,Durham Street South,I2850,Durham South / Tuam,candidate,0.18
+1415515149,Lichfield Street,I3210,Lichfield / Madras,candidate,36.97
+1415515150#1,Lichfield Street,I3210,Lichfield / Madras,candidate,3.94
+147247811,Rolleston Avenue,I2606,Rolleston / Worcester,nearest,1.72
+147247814#1,Cambridge Terrace,I2815,Cambridge / Hereford,candidate,0.34
+1476693652,Carlton Mill Road,I2537,Bealey / Carlton Mill / Harper / Park,candidate,8.53
+1494899699,Armagh Street,I3063,Armagh / New Regent,candidate,0.60
+1494899699,Armagh Street,I2959,Armagh / Colombo,candidate,0.61
+1509673110,Barbadoes Street,I3307,Barbadoes / Kilmore,candidate,0.61
+1509721536,Kilmore Street,I3255,Kilmore / Oxford,candidate,31.06
+1509721537,Kilmore Street,I3255,Kilmore / Oxford,enter,0.18
+165377527#0,Fitzgerald Avenue,I3484,Avonside / Fitzgerald / Kilmore,exit,0.11
+165377527#0,Fitzgerald Avenue,I3457,Kilmore / Oxford,candidate,38.14
+165377527#1,Fitzgerald Avenue,I3457,Kilmore / Oxford,candidate,39.62
+180762458,Park Terrace,I2621,Hagley / Park / Salisbury,candidate,2.74
+180763923,Park Terrace,I2605,Armagh / Hagley Park / Park / Rolleston,candidate,0.33
+182824587#1,Moorhouse Avenue,I2859,Durham South / Moorhouse,enter,0.03
+194715884#0,Barbadoes Street,I3325,Barbadoes / Moorhouse / Waltham,candidate,0.71
+194715885,Tuam Street,I3212,Madras / Tuam,candidate,1.02
+194716060#1,Tuam Street,I3220,Barbadoes / Tuam,candidate,1.31
+194716060#1,Tuam Street,I3320,Barbadoes / Tuam,candidate,1.31
+194728917,Bealey Avenue,I2712,Bealey / Montreal,candidate,0.05
+194730196#1,Latimer Square,I3239,Latimer / Worcester,nearest,0.09
+194730196#1,Latimer Square,I3238,Gloucester / Latimer / Madras,candidate,4.79
+194730196#1,Latimer Square,I3171,Latimer / Worcester,candidate,99.52
+199412441,Cambridge Terrace,I3303,Barbadoes / Salisbury,candidate,1.11
+206789267#1,Colombo Street,I2961,Colombo / Gloucester,candidate,3.85
+207144254#0,Peterborough Street,I2754,Cranmer / Kilmore / Montreal,exit,0.35
+22779461#1,Cambridge Terrace,I2832,Cambridge / Durham North / Gloucester,exit,0.42
+22779461#1,Cambridge Terrace,I2814,Cambridge / Worcester,candidate,5.96
+22779530#0,Riccarton Avenue,I2554,Hagley / Oxford / Riccarton / Tuam,candidate,2.12
+231161093,Cambridge Terrace,I2728,Montreal / Tuam,exit,0.02
+231161094#12,Montreal Street,I2716,Gloucester / Montreal,exit,0.29
+231161094#3,Montreal Street,I2719,Hereford / Montreal,candidate,0.75
+231161094#6,Montreal Street,I2719,Hereford / Montreal,exit,0.06
+231161094#6,Montreal Street,I2718,Montreal / Worcester,candidate,0.81
+231161094#9,Montreal Street,I2718,Montreal / Worcester,exit,0.09
+231161094#9,Montreal Street,I2716,Gloucester / Montreal,candidate,0.77
+231314596,Oxford Terrace,I2814,Cambridge / Worcester,candidate,80.64
+23146862#0,Montreal Street,I2754,Cranmer / Kilmore / Montreal,enter,0.35
+23146872#1,Kilmore Street,I3200,Kilmore / Madras,candidate,0.41
+23146872#1,Kilmore Street,I3093,Kilmore / Manchester,candidate,1.05
+23150982#0,Latimer Square,I3240,Hereford / Latimer / Madras,candidate,7.23
+23150982#1,Latimer Square,I3239,Latimer / Worcester,candidate,3.93
+23150982#1,Latimer Square,I3240,Hereford / Latimer / Madras,candidate,7.64
+23150982#1,Latimer Square,I3171,Latimer / Worcester,candidate,99.87
+23150992,Gloucester Street,I3239,Latimer / Worcester,exit,0.09
+23150992,Gloucester Street,I3238,Gloucester / Latimer / Madras,nearest,2.48
+23151049#1,Tuam Street,I2554,Hagley / Oxford / Riccarton / Tuam,candidate,0.47
+23151049#1,Tuam Street,I2610,Antigua / Tuam,candidate,2.48
+23235415#0,Cashel Street,I3488,Cashel / Fitzgerald,candidate,0.12
+23245254#0,Falsgrave Street,I3502,Falsgrave / Fitzgerald / Moorhouse,candidate,0.11
+235373640,Hereford Street,I2963,Cathedral / Colombo / Hereford / High,nearest,0.07
+235373640,Hereford Street,I2874,Hereford / Oxford,exit,0.22
+235373640,Hereford Street,I2815,Cambridge / Hereford,exit,0.34
+235409004,Salisbury Street,I2621,Hagley / Park / Salisbury,candidate,8.21
+235409006,Salisbury Street,I2715,Montreal / Salisbury / Victoria,nearest,0.64
+235409006,Salisbury Street,I2621,Hagley / Park / Salisbury,enter,2.74
+235540908#1,Bealey Avenue,I2632,Bealey / Papanui / Victoria,enter,0.76
+235549020#0,Bealey Avenue,I3475,Bealey / Fitzgerald / London / Whitmore,candidate,4.18
+235556123#1,Fitzgerald Avenue,I3475,Bealey / Fitzgerald / London / Whitmore,nearest,0.17
+235758268#0,Armagh Street,I2849,Armagh / Durham North,nearest,0.05
+235758268#0,Armagh Street,I2755,Armagh / Cranmer / Montreal,candidate,4.20
+235758268#0,Armagh Street,I2906,Armagh / Oxford,candidate,113.14
+235758520,Cambridge Terrace,I2814,Cambridge / Worcester,candidate,5.96
+237357953#0,Cranmer Square,I2755,Armagh / Cranmer / Montreal,nearest,0.68
+237357953#0,Cranmer Square,I2754,Cranmer / Kilmore / Montreal,candidate,6.28
+24721411,Worcester Street,I2814,Cambridge / Worcester,candidate,80.64
+24721413#0,Colombo Street,I2963,Cathedral / Colombo / Hereford / High,candidate,0.58
+24721413#0,Colombo Street,I2966,Cashel / Colombo,candidate,2.55
+24721413#1,Colombo Street,I2966,Cashel / Colombo,enter,0.04
+24721413#1,Colombo Street,I2967,Colombo / Lichfield,candidate,2.85
+24721880#1,Park Terrace,I2537,Bealey / Carlton Mill / Harper / Park,candidate,7.49
+24721896#0,Rolleston Avenue,I2605,Armagh / Hagley Park / Park / Rolleston,exit,0.01
+24721896#0,Rolleston Avenue,I2606,Rolleston / Worcester,enter,1.72
+250665343#1,Gasson Street,I3221,Gasson / Madras / Moorhouse,candidate,5.31
+26600479#0,Saint Asaph Street,I3258,Ferry / St Asaph,enter,0.39
+26600479#0,Saint Asaph Street,I3213,High / Madras / St Asaph,candidate,7.30
+26600510#1,Madras Street,I3198,Bealey / Madras,candidate,0.59
+26600510#1,Madras Street,I3195,Madras / Salisbury,candidate,0.69
+26600514#0,Kilmore Street,I3200,Kilmore / Madras,candidate,0.65
+26600519,Kilmore Street,I3200,Kilmore / Madras,candidate,0.65
+26701176,Moorhouse Avenue,I2859,Durham South / Moorhouse,exit,0.03
+27166907#2,Antigua Street,I2611,Antigua / St Asaph,candidate,1.87
+30859550,Montreal Street,I2755,Armagh / Cranmer / Montreal,candidate,49.50
+318023470#1,Fitzgerald Avenue,I3486,Fitzgerald / Worcester,candidate,8.56
+318023479#0,Fitzgerald Avenue,I3488,Cashel / Fitzgerald,enter,0.12
+318023479#3,Fitzgerald Avenue,I3488,Cashel / Fitzgerald,exit,0.12
+32030577#0,Armagh Street,I3063,Armagh / New Regent,enter,0.24
+32030577#0,Armagh Street,I3096,Armagh / Manchester,candidate,0.72
+32050428#0,Worcester Boulevard,I2718,Montreal / Worcester,candidate,0.09
+32050428#0,Worcester Boulevard,I2606,Rolleston / Worcester,candidate,2.32
+32050447,Hereford Street,I2874,Hereford / Oxford,candidate,0.73
+32841694,Hereford Street,I3240,Hereford / Latimer / Madras,nearest,0.72
+32841811#1,Tuam Street,I2728,Montreal / Tuam,candidate,0.02
+335813776#3,Saint Asaph Street,I3213,High / Madras / St Asaph,exit,0.58
+335831540#1,Madras Street,I3201,Chester East / Madras,nearest,0.37
+335831540#2,Madras Street,I3201,Chester East / Madras,candidate,0.59
+337266347#0,Lichfield Street,I2967,Colombo / Lichfield,candidate,2.73
+337266347#0,Lichfield Street,I2966,Cashel / Colombo,candidate,114.67
+337266351#1,Hereford Street,I3240,Hereford / Latimer / Madras,candidate,24.67
+337266352#0,Worcester Street,I3239,Latimer / Worcester,candidate,3.93
+337266560,Barbadoes Street,I3303,Barbadoes / Salisbury,exit,0.12
+337266567,Oxford Terrace,I3255,Kilmore / Oxford,nearest,0.18
+337282272#0,Kilmore Street,I2848,Durham North / Kilmore / Victoria,candidate,2.49
+337282273#1,Barbadoes Street,I3307,Barbadoes / Kilmore,candidate,0.97
+337282273#5,Barbadoes Street,I3317,Barbadoes / Gloucester,enter,0.07
+337282274#1,Kilmore Street,I3307,Barbadoes / Kilmore,nearest,0.44
+337282274#1,Kilmore Street,I3255,Kilmore / Oxford,candidate,1.24
+337283982#0,Avonside Drive,I3484,Avonside / Fitzgerald / Kilmore,candidate,2.41
+337504027#1,Gloucester Street,I2716,Gloucester / Montreal,nearest,0.29
+337504027#1,Gloucester Street,I2606,Rolleston / Worcester,candidate,118.35
+337504027#1,Gloucester Street,I2718,Montreal / Worcester,candidate,118.46
+337504030,Armagh Street,I2605,Armagh / Hagley Park / Park / Rolleston,candidate,0.29
+337504030,Armagh Street,I2755,Armagh / Cranmer / Montreal,enter,0.68
+337504039#1,Durham Street North,I2840,Durham North / Salisbury,candidate,1.19
+337504041#1,Salisbury Street,I2956,Colombo / Salisbury,nearest,0.30
+337504041#1,Salisbury Street,I2840,Durham North / Salisbury,candidate,1.19
+337505266#1,Kilmore Street,I2958,Colombo / Kilmore,candidate,0.54
+346180061#0,Colombo Street,I2963,Cathedral / Colombo / Hereford / High,candidate,0.67
+346180063#0,Hereford Street,I2963,Cathedral / Colombo / Hereford / High,enter,0.07
+346180063#0,Hereford Street,I2874,Hereford / Oxford,enter,0.22
+346180063#0,Hereford Street,I2815,Cambridge / Hereford,enter,0.34
+384497885#0,Lichfield Street,I3220,Barbadoes / Tuam,exit,0.12
+384497885#0,Lichfield Street,I3320,Barbadoes / Tuam,exit,0.12
+384497887#1,Tuam Street,I3212,Madras / Tuam,candidate,1.38
+392044386#1,Kilmore Street,I3093,Kilmore / Manchester,candidate,0.29
+392044386#2,Kilmore Street,I2958,Colombo / Kilmore,candidate,0.55
+392044387#1,Manchester Street,I3088,Bealey / Manchester,candidate,0.53
+392044388#1,Lichfield Street,I2967,Colombo / Lichfield,candidate,2.69
+392044388#1,Lichfield Street,I2966,Cashel / Colombo,candidate,119.24
+392044390#0,Tuam Street,I3104,Manchester / Tuam,candidate,1.26
+392044392#1,Salisbury Street,I3195,Madras / Salisbury,candidate,0.04
+396138893#1,Ferry Road,I3494,Ferry / Fitzgerald,candidate,0.04
+396340836#2,Armagh Street,I3096,Armagh / Manchester,candidate,0.33
+396340836#3,Armagh Street,I3201,Chester East / Madras,enter,0.37
+396340837#0,Gloucester Street,I3317,Barbadoes / Gloucester,candidate,0.07
+396340837#0,Gloucester Street,I3238,Gloucester / Latimer / Madras,candidate,14.51
+396340837#3,Gloucester Street,I3485,Fitzgerald / Gloucester,candidate,0.11
+396340837#3,Gloucester Street,I3317,Barbadoes / Gloucester,candidate,0.40
+39992006#1,Barbadoes Street,I3303,Barbadoes / Salisbury,enter,0.12
+39992006#1,Barbadoes Street,I3304,Barbadoes / Bealey,candidate,4.71
+406753471,Oxford Terrace,I3063,Armagh / New Regent,candidate,43.73
+406753472#1,Manchester Street,I3093,Kilmore / Manchester,enter,0.29
+41646975,Oxford Terrace,I2554,Hagley / Oxford / Riccarton / Tuam,candidate,1.36
+41647644#1,Durham Street South,I2843,Cambridge / Durham South / Lichfield / Oxford,candidate,9.50
+41647645#0,Montreal Street,I2755,Armagh / Cranmer / Montreal,candidate,11.44
+41655465#0,Armagh Street,I2959,Armagh / Colombo,nearest,0.10
+41655465#0,Armagh Street,I2906,Armagh / Oxford,candidate,11.77
+41655465#3,Armagh Street,I3063,Armagh / New Regent,nearest,0.24
+41655465#3,Armagh Street,I2959,Armagh / Colombo,candidate,0.61
+41655467#0,Colombo Street,I2958,Colombo / Kilmore,candidate,0.56
+41655467#2,Colombo Street,I2959,Armagh / Colombo,candidate,0.61
+41655467#5,Colombo Street,I2959,Armagh / Colombo,candidate,0.53
+41655467#5,Colombo Street,I2961,Colombo / Gloucester,enter,3.76
+436513712#0,Gloucester Street,I3064,Gloucester / New Regent,candidate,1.53
+436513712#0,Gloucester Street,I2961,Colombo / Gloucester,candidate,4.05
+436513712#1,Gloucester Street,I3064,Gloucester / New Regent,candidate,1.61
+436513714#0,Gloucester Street,I3098,Gloucester / Manchester,nearest,0.29
+436514739#2,Lichfield Street,I3105,High / Lichfield / Manchester,candidate,0.94
+436515355#0,Manchester Street,I3104,Manchester / Tuam,exit,0.54
+436515355#0,Manchester Street,I3105,High / Lichfield / Manchester,exit,0.94
+463039420#0,Manchester Street,I3093,Kilmore / Manchester,candidate,1.05
+464000308#1,Saint Asaph Street,I2853,Durham South / St Asaph,candidate,1.55
+464000309,Colombo Street,I2853,Durham South / St Asaph,enter,1.16
+464000309,Colombo Street,I2970,Colombo / St Asaph,candidate,2.09
+479999311#0,Hagley Avenue,I2554,Hagley / Oxford / Riccarton / Tuam,candidate,2.12
+4830778,Worcester Street,I3097,Manchester / Worcester,enter,0.01
+4830778,Worcester Street,I3171,Latimer / Worcester,candidate,2.08
+4830803,Peterborough Street,I2957,Colombo / Peterborough,candidate,1.39
+4830815#1,Chester Street East,I3201,Chester East / Madras,candidate,0.59
+4830840#2,Victoria Street,I2840,Durham North / Salisbury,enter,0.61
+4830840#2,Victoria Street,I2715,Montreal / Salisbury / Victoria,candidate,2.76
+4890669,Bealey Avenue,I2537,Bealey / Carlton Mill / Harper / Park,candidate,0.47
+4890809#0,Hereford Street,I2719,Hereford / Montreal,nearest,0.06
+4891254#0,Latimer Square,I3171,Latimer / Worcester,nearest,0.12
+4891254#1,Latimer Square,I3171,Latimer / Worcester,candidate,2.24
+4891444#1,Kilmore Street,I3457,Kilmore / Oxford,candidate,0.23
+4891444#2,Kilmore Street,I3307,Barbadoes / Kilmore,candidate,0.97
+4891444#2,Kilmore Street,I3457,Kilmore / Oxford,candidate,3.32
+493360448#2,Durham Street South,I2843,Cambridge / Durham South / Lichfield / Oxford,nearest,0.58
+493360952#1,Durham Street North,I2848,Durham North / Kilmore / Victoria,candidate,0.74
+493360952#1,Durham Street North,I2849,Armagh / Durham North,candidate,1.80
+494827032#2,Manchester Street,I3096,Armagh / Manchester,candidate,0.72
+494827032#2,Manchester Street,I3098,Gloucester / Manchester,candidate,2.04
+495607738#1,Gloucester Street,I2832,Cambridge / Durham North / Gloucester,candidate,0.55
+504917153#0,Durham Street North,I2832,Cambridge / Durham North / Gloucester,candidate,0.76
+512130749#0,Montreal Street,I2728,Montreal / Tuam,candidate,0.52
+517602199,Armagh Street,I2755,Armagh / Cranmer / Montreal,candidate,11.40
+530436763#1,Montreal Street,I2728,Montreal / Tuam,candidate,0.60
+531164117#0,Moorhouse Avenue,I3502,Falsgrave / Fitzgerald / Moorhouse,enter,0.11
+535471224#1,Worcester Street,I3097,Manchester / Worcester,exit,0.01
+54895409#0,Antigua Street,I2554,Hagley / Oxford / Riccarton / Tuam,exit,0.47
+54895409#0,Antigua Street,I2610,Antigua / Tuam,candidate,2.48
+571961655#2,Manchester Street,I3104,Manchester / Tuam,enter,0.54
+571961655#2,Manchester Street,I3105,High / Lichfield / Manchester,enter,0.94
+571961656#0,Manchester Street,I3104,Manchester / Tuam,candidate,1.26
+597576896#0,Colombo Street,I2976,Colombo / Moorhouse,nearest,0.33
+597576896#1,Colombo Street,I2976,Colombo / Moorhouse,candidate,0.80
+597576903,Moorhouse Avenue,I3221,Gasson / Madras / Moorhouse,exit,1.03
+597576939#1,Fitzgerald Avenue,I3492,Fitzgerald / Tuam,exit,1.21
+597576939#1,Fitzgerald Avenue,I3497,Fitzgerald / St Asaph,candidate,1.53
+597576944#1,Fitzgerald Avenue,I3502,Falsgrave / Fitzgerald / Moorhouse,exit,0.11
+597576953#1,Moorhouse Avenue,I3502,Falsgrave / Fitzgerald / Moorhouse,candidate,0.88
+603915273#0,Lichfield Street,I2843,Cambridge / Durham South / Lichfield / Oxford,candidate,8.77
+611456667,Bealey Avenue,I3043,Bealey / Sherborne,candidate,0.22
+611456667,Bealey Avenue,I2953,Bealey / Colombo,candidate,1.38
+611456671#5,Bealey Avenue,I2836,Bealey / Durham North,nearest,0.10
+611456671#5,Bealey Avenue,I2953,Bealey / Colombo,nearest,0.49
+611456700#1,Fitzgerald Avenue,I3475,Bealey / Fitzgerald / London / Whitmore,candidate,4.07
+611456703#1,Bealey Avenue,I3475,Bealey / Fitzgerald / London / Whitmore,exit,0.17
+646361141,Bealey Avenue,I2537,Bealey / Carlton Mill / Harper / Park,enter,0.47
+646364260#1,Saint Asaph Street,I3107,Manchester / St Asaph,candidate,0.42
+651950549#0,Manchester Street,I3096,Armagh / Manchester,enter,0.33
+651950549#0,Manchester Street,I3063,Armagh / New Regent,candidate,77.50
+657468209#1,Durham Street South,I2850,Durham South / Tuam,candidate,0.80
+657468209#1,Durham Street South,I2843,Cambridge / Durham South / Lichfield / Oxford,candidate,9.50
+689754259#1,Victoria Street,I2632,Bealey / Papanui / Victoria,nearest,0.76
+700830261#0,Colombo Street,I2850,Durham South / Tuam,enter,0.18
+700830261#0,Colombo Street,I2970,Colombo / St Asaph,candidate,2.40
+705900734,Worcester Street,I3486,Fitzgerald / Worcester,candidate,9.50
+714324235#0,Ferry Road,I3323,Barbadoes / Ferry,candidate,1.20
+770109403#2,Manchester Street,I3107,Manchester / St Asaph,enter,0.42
+770109405#0,Montreal Street,I2727,Montreal / St Asaph,candidate,2.64
+777209675#1,Madras Street,I3213,High / Madras / St Asaph,nearest,0.58
+777209676#0,Madras Street,I3208,Cashel / Madras,candidate,0.17
+777209676#0,Madras Street,I3210,Lichfield / Madras,exit,2.38
+777634272#1,Moorhouse Avenue,I2629,Antigua / Moorhouse,nearest,0.24
+777634273#1,Moorhouse Avenue,I2731,Montreal / Moorhouse,exit,0.19
+815791112,Oxford Terrace,I3457,Kilmore / Oxford,candidate,2.91
+817015139,Madras Street,I3208,Cashel / Madras,candidate,1.21
+821111101,Moorhouse Avenue,I3502,Falsgrave / Fitzgerald / Moorhouse,candidate,0.76
+821114319#1,Barbadoes Street,I3323,Barbadoes / Ferry,nearest,0.07
+821114320,Moorhouse Avenue,I3325,Barbadoes / Moorhouse / Waltham,exit,0.18
+821964039#2,Bealey Avenue,I3043,Bealey / Sherborne,exit,0.22
+822357566#1,Saint Asaph Street,I2850,Durham South / Tuam,exit,0.18
+822357566#1,Saint Asaph Street,I2970,Colombo / St Asaph,nearest,0.25
+822357566#1,Saint Asaph Street,I2853,Durham South / St Asaph,exit,1.16
+823329197#0,Saint Asaph Street,I3107,Manchester / St Asaph,candidate,3.24
+828933465,Moorhouse Avenue,I3221,Gasson / Madras / Moorhouse,nearest,1.03
+829459009#1,Bealey Avenue,I2712,Bealey / Montreal,exit,0.05
+829459009#1,Bealey Avenue,I2836,Bealey / Durham North,candidate,2.73
+830501797#0,Manchester Street,I3100,Cashel / Manchester,enter,0.02
+830501798#1,Manchester Street,I3097,Manchester / Worcester,nearest,0.01
+896891141#1,Bealey Avenue,I3088,Bealey / Manchester,nearest,0.09
+896891141#1,Bealey Avenue,I3043,Bealey / Sherborne,candidate,7.73
+902156780#1,Barbadoes Street,I3317,Barbadoes / Gloucester,candidate,0.40
+902156783#1,Hereford Street,I3315,Barbadoes / Hereford,enter,0.02
+902156784#1,Barbadoes Street,I3323,Barbadoes / Ferry,candidate,1.21
+902156784#1,Barbadoes Street,I3322,Barbadoes / St Asaph,candidate,1.96
+902156786#1,Saint Asaph Street,I3322,Barbadoes / St Asaph,candidate,0.65
+902156786#1,Saint Asaph Street,I3258,Ferry / St Asaph,candidate,5.27
+902156789#1,Gloucester Street,I3238,Gloucester / Latimer / Madras,candidate,4.79
+902156793#1,Bealey Avenue,I3198,Bealey / Madras,exit,0.14
+902156793#1,Bealey Avenue,I3304,Barbadoes / Bealey,exit,1.00
+902156794#1,Bealey Avenue,I3088,Bealey / Manchester,candidate,1.06
+902156794#1,Bealey Avenue,I3198,Bealey / Madras,candidate,1.27
+902156797#1,Hereford Street,I3489,Fitzgerald / Hereford,candidate,0.79
+902156801#1,Saint Asaph Street,I3323,Barbadoes / Ferry,exit,0.07
+902156801#1,Saint Asaph Street,I3497,Fitzgerald / St Asaph,nearest,0.47
+902156801#1,Saint Asaph Street,I3322,Barbadoes / St Asaph,exit,0.65
+902156803,Fitzgerald Avenue,I3497,Fitzgerald / St Asaph,exit,0.47
+902156803,Fitzgerald Avenue,I3492,Fitzgerald / Tuam,candidate,1.20
+926384058#0,Antigua Street,I2610,Antigua / Tuam,enter,0.84
+942443558,Ferry Road,I3323,Barbadoes / Ferry,candidate,1.10
+942858501#0,Madras Street,I3201,Chester East / Madras,candidate,49.55
+942858501#1,Madras Street,I3200,Kilmore / Madras,candidate,0.65
+95465477,Cashel Street,I3100,Cashel / Manchester,candidate,1.82
+961036239#0,Antigua Street,I2629,Antigua / Moorhouse,candidate,0.67
+961036241,Antigua Street,I2629,Antigua / Moorhouse,candidate,0.35
+981884343#0,Tuam Street,I2850,Durham South / Tuam,candidate,0.48
+981887619#0,Antigua Street,I2611,Antigua / St Asaph,candidate,1.97
+984247262#2,Tuam Street,I2610,Antigua / Tuam,candidate,0.84
+987155148#1,Manchester Street,I3100,Cashel / Manchester,nearest,0.02
+988781906,Armagh Street,I2605,Armagh / Hagley Park / Park / Rolleston,candidate,0.33
+993201434#1,Tuam Street,I2968,Colombo / Tuam,candidate,1.00
+993555374#0,Manchester Street,I3097,Manchester / Worcester,candidate,0.62
+993555375#2,Manchester Street,I3098,Gloucester / Manchester,candidate,2.20
+993555376#0,Manchester Street,I3096,Armagh / Manchester,candidate,0.72
+993555376#0,Manchester Street,I3098,Gloucester / Manchester,candidate,2.30
+993555376#0,Manchester Street,I3063,Armagh / New Regent,candidate,77.82

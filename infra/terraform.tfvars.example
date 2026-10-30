@@ -1,0 +1,25 @@
+# Copy to terraform.tfvars and fill in YOUR values. terraform.tfvars is gitignored.
+
+# Must be globally unique across all of S3.
+dashboard_bucket_name = "christchurch-digital-twin-dashboard-CHANGEME"
+
+# Email subscribed to the billing alarm. You must click the confirmation link
+# AWS emails you after the first apply, or the alarm can't notify you.
+alarm_email = "you@example.com"
+
+# --- InfluxDB Cloud (fill once your account + bucket exist) --------------------
+influxdb_url = "https://REGION.aws.cloud2.influxdata.com"
+influxdb_org = "your-influx-org"
+# influxdb_bucket_name defaults to "traffic-metrics"
+
+# --- ETL: CCC traffic-count workbooks (etl.tf) --------------------------------
+# Globally unique across all of S3.
+etl_data_bucket_name = "christchurch-digital-twin-traffic-data-CHANGEME"
+# drive_folder_id defaults to the public CCC counts folder.
+# etl_schedule_expression defaults to "rate(7 days)".
+# etl_max_files = "100"   # set for a first bounded backfill; unset = no cap
+
+# Optional overrides (defaults shown):
+# aws_region                  = "ap-southeast-2"
+# environment                 = "prod"
+# billing_alarm_threshold_usd = 5

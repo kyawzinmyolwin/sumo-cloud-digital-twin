@@ -1,0 +1,703 @@
+﻿<?xml version='1.0'?>
+<?mso-application progid='Excel.Sheet'?>
+<s:Workbook xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:s="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <o:Title>I3063 Armagh / New Regent</o:Title>
+    <o:LastAuthor>Miovision Technologies</o:LastAuthor>
+    <o:Created>2018-12-04T00:00:00</o:Created>
+    <o:LastSaved>2018-12-04T00:00:00</o:LastSaved>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <x:WindowHeight>11520</x:WindowHeight>
+    <x:WindowTopX>0</x:WindowTopX>
+    <x:WindowTopY>0</x:WindowTopY>
+    <x:WindowWidth>15360</x:WindowWidth>
+    <x:ProtectStructure>False</x:ProtectStructure>
+    <x:ProtectWindows>False</x:ProtectWindows>
+  </x:ExcelWorkbook>
+  <s:Styles>
+    <s:Style s:ID="Default" s:Name="Normal">
+      <s:Alignment s:Vertical="Bottom" />
+      <s:Font s:FontName="Arial" s:Size="10" />
+    </s:Style>
+    <s:Style s:ID="HeaderLabel">
+      <s:Alignment s:Horizontal="Right" />
+      <s:Font s:FontName="Arial Black" s:Size="10" />
+    </s:Style>
+    <s:Style s:ID="HeaderValue">
+      <s:Alignment s:Horizontal="Left" />
+      <s:Font s:FontName="Arial Black" s:Size="10" />
+    </s:Style>
+    <s:Style s:ID="TableHeader">
+      <s:Alignment s:Horizontal="Center" />
+      <s:Borders>
+        <s:Border s:Color="#000000" s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Arial" s:Size="10" />
+      <s:Interior s:Color="#CCCCCC" s:Pattern="Solid" />
+    </s:Style>
+    <s:Style s:ID="TableHeaderNoBottom">
+      <s:Alignment s:Horizontal="Center" />
+      <s:Borders>
+        <s:Border s:Color="#000000" s:Position="Top" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Arial" s:Size="10" />
+      <s:Interior s:Color="#CCCCCC" s:Pattern="Solid" />
+    </s:Style>
+    <s:Style s:ID="TableHeaderNoTop">
+      <s:Alignment s:Horizontal="Center" s:Vertical="Top" />
+      <s:Borders>
+        <s:Border s:Color="#000000" s:Position="Right" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Bottom" s:LineStyle="Continuous" s:Weight="1" />
+        <s:Border s:Color="#000000" s:Position="Left" s:LineStyle="Continuous" s:Weight="1" />
+      </s:Borders>
+      <s:Font s:FontName="Arial" s:Size="10" />
+      <s:Interior s:Color="#CCCCCC" s:Pattern="Solid" />
+    </s:Style>
+    <s:Style s:ID="TimeStamp">
+      <s:Font s:FontName="Arial" s:Size="10" />
+      <s:NumberFormat s:Format="h:mm tt" />
+    </s:Style>
+  </s:Styles>
+  <s:Worksheet s:Name="Pedestrians">
+    <s:Table s:DefaultRowHeight="15" s:DefaultColumnWidth="64" s:ExpandedRowCount="33" x:FullColumns="1" x:FullRows="1">
+      <s:Column s:Width="64" />
+      <s:Column s:Width="110" />
+      <s:Column s:Width="110" />
+      <s:Column s:Width="110" />
+      <s:Column s:Width="110" />
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Study Name</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">I3063 Armagh / New Regent</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Start Date</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">31/10/2018</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Start Time</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">1:00 PM</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Site Code</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">I3063 Armagh / New Regent</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row />
+      <s:Row />
+      <s:Row>
+        <s:Cell s:StyleID="HeaderValue">
+          <s:Data s:Type="String">Channel</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Pathway 2</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Pathway 2</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="HeaderValue">
+          <s:Data s:Type="String">Direction</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Southbound</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Northbound</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row />
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:00 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">3</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">12</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:15 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">9</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">7</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:30 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">11</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:45 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">13</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">11</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:00 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">4</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">9</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:15 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">6</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">6</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:30 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">8</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">13</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:45 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">12</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:00 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">3</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">19</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:15 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">23</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:30 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">3</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">14</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:45 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">4</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">8</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:00 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:15 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">4</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:30 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">4</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:45 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:00 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">5</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:15 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">3</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:30 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:45 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+    </s:Table>
+  </s:Worksheet>
+  <s:Worksheet s:Name="Bicycles">
+    <s:Table s:DefaultRowHeight="15" s:DefaultColumnWidth="64" s:ExpandedRowCount="33" x:FullColumns="1" x:FullRows="1">
+      <s:Column s:Width="64" />
+      <s:Column s:Width="110" />
+      <s:Column s:Width="110" />
+      <s:Column s:Width="110" />
+      <s:Column s:Width="110" />
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Study Name</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">I3063 Armagh / New Regent</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Start Date</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">31/10/2018</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Start Time</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">1:00 PM</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String">Site Code</s:Data>
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String">I3063 Armagh / New Regent</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:MergeAcross="1" s:StyleID="HeaderLabel">
+          <s:Data s:Type="String" />
+        </s:Cell>
+        <s:Cell s:MergeAcross="3" s:StyleID="HeaderValue">
+          <s:Data s:Type="String" />
+        </s:Cell>
+      </s:Row>
+      <s:Row />
+      <s:Row />
+      <s:Row>
+        <s:Cell s:StyleID="HeaderValue">
+          <s:Data s:Type="String">Channel</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Pathway 2</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Pathway 2</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell s:StyleID="HeaderValue">
+          <s:Data s:Type="String">Direction</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Southbound</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="TableHeader">
+          <s:Data s:Type="String">Northbound</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row />
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:00 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:15 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:30 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">1:45 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:00 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:15 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:30 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">4:45 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:00 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">3</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:15 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:30 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">3</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">5:45 PM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">1</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:00 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:15 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:30 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">7:45 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:00 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:15 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:30 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+      <s:Row>
+        <s:Cell>
+          <s:Data s:Type="String">8:45 AM</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">2</s:Data>
+        </s:Cell>
+        <s:Cell s:StyleID="Default">
+          <s:Data s:Type="Number">0</s:Data>
+        </s:Cell>
+      </s:Row>
+    </s:Table>
+  </s:Worksheet>
+</s:Workbook>

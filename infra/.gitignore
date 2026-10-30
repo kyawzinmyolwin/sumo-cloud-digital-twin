@@ -1,0 +1,17 @@
+# Terraform working files — never commit state (may contain secrets) or
+# account-specific config.
+.terraform/
+build/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Real variable/backend values are private; only the *.example files are tracked.
+*.tfvars
+*.tfvars.json
+backend.hcl
+!*.tfvars.example
+!backend.hcl.example
+
+# DO commit .terraform.lock.hcl — it pins provider hashes for reproducible init.

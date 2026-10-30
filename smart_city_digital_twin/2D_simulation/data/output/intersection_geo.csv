@@ -1,0 +1,102 @@
+intersection_id,latitude,longitude,street_1,street_2,street_3,street_4,RoadIntersectionID,X,Y,IntersectionName
+I2537,-43.52091222,172.62595130,Bealey,Carlton Mill,Harper,Park,3456,1569770.712,5181268.1951,Bealey Avenue / Park Terrace / Carlton Mill Road / Harper Avenue
+I2554,-43.53500057,172.62622864,Hagley,Oxford,Riccarton,Tuam,3477,1569800.1553,5179703.6613,Hagley Avenue / Tuam Street / Oxford Terrace / Riccarton Avenue
+I2605,-43.52878891,172.62760420,Armagh,Hagley Park,Park,Rolleston,3530,1569908.2087,5180394.0196,Armagh Street / Park Terrace / Rolleston Avenue
+I2606,-43.53094922,172.62758316,Rolleston,Worcester,,,3529,1569907.5827,5180154.0903,Worcester Street / Rolleston Avenue
+I2610,-43.53532067,172.62760361,Antigua,Tuam,,,3533,1569911.4089,5179668.61,Tuam Street / Antigua Street
+I2611,-43.53641192,172.62760042,Antigua,St Asaph,,,3534,1569911.6931,5179547.4157,St Asaph Street / Antigua Street
+I2621,,,Hagley,Park,Salisbury,,,,,
+I2629,-43.53995720,172.62791609,Antigua,Moorhouse,,,3548,1569938.9596,5179153.7953,Moorhouse Avenue / Antigua Street
+I2632,-43.52088281,172.62806039,Bealey,Papanui,Victoria,,3552,1569941.1467,5181272.2254,Papanui Road / Bealey Avenue / Victoria Street
+I2712,-43.52087556,172.63057641,Bealey,Montreal,,,3649,1570144.4785,5181273.9367,Montreal Street / Bealey Avenue
+I2715,-43.52441001,172.63059074,Montreal,Salisbury,Victoria,,3652,1570147.3799,5180881.4101,Montreal Street / Salisbury Street / Victoria Street
+I2716,-43.52986245,172.63059266,Gloucester,Montreal,,,3654,1570150.2238,5180275.8706,Gloucester Street / Montreal Street
+I2718,-43.53094333,172.63059508,Montreal,Worcester,,,3655,1570150.9521,5180155.8305,Worcester Street / Montreal Street
+I2719,-43.53204250,172.63060076,Hereford,Montreal,,,3656,1570151.9534,5180033.7596,Hereford Street / Montreal Street
+I2727,-43.53640576,172.63061312,Montreal,St Asaph,,,3666,1570155.1036,5179549.1852,St Asaph Street / Montreal Street
+I2728,-43.53531525,172.63061088,Montreal,Tuam,,,3662,1570154.3855,5179670.2958,Tuam Street / Montreal Street
+I2731,-43.53995315,172.63060730,Montreal,Moorhouse,,,3671,1570156.3832,5179155.214,Moorhouse Avenue / Montreal Street
+I2754,,,Cranmer,Kilmore,Montreal,,,,,
+I2755,,,Armagh,Cranmer,Montreal,,,,,
+I2814,-43.53094168,172.63285485,Cambridge,Worcester,,,3769,1570333.5479,5180156.8215,Worcester Street / Cambridge Terrace
+I2815,-43.53203957,172.63286717,Cambridge,Hereford,,,3772,1570335.0815,5180034.896,Hereford Street / Cambridge Terrace
+I2832,-43.52986068,172.63347674,Cambridge,Durham North,Gloucester,,3793,1570383.2696,5180277.0983,Gloucester Street / Durham Street North / Cambridge Terrace
+I2836,-43.52087516,172.63358966,Bealey,Durham North,,,3799,1570387.9995,5181275.0573,Durham Street North / Bealey Avenue
+I2840,-43.52440363,172.63358490,Durham North,Salisbury,,,3804,1570389.3404,5180883.1894,Durham Street North / Salisbury Street
+I2843,-43.53421802,172.63351200,Cambridge,Durham South,Lichfield,Oxford,3800,1570388.2509,5179793.1891,Oxford Terrace / Lichfield Street / Durham Street South
+I2848,-43.52658813,172.63359954,Durham North,Kilmore,Victoria,,3809,1570391.5918,5180640.5864,Durham Street North / Kilmore Street / Victoria Street
+I2849,-43.52876955,172.63360431,Armagh,Durham North,,,3812,1570393.0443,5180398.3224,Armagh Street / Durham Street North
+I2850,-43.53530814,172.63362309,Durham South,Tuam,,,3813,1570397.7602,5179672.1616,Tuam Street / Durham Street South
+I2853,-43.53639852,172.63363112,Durham South,St Asaph,,,3826,1570398.9425,5179551.068,St Asaph Street / Durham Street South
+I2859,-43.53995081,172.63360905,Durham South,Moorhouse,,,3822,1570398.8971,5179156.5462,Moorhouse Avenue / Durham Street South
+I2874,-43.53203780,172.63382816,Hereford,Oxford,,,3841,1570412.73,5180035.4341,Hereford Street / Oxford Terrace
+I2906,-43.52876568,172.63502608,Armagh,Oxford,,,3886,1570507.9302,5180399.258,Armagh Street / Oxford Terrace
+I2953,-43.52087953,172.63660050,Bealey,Colombo,,,3943,1570631.3269,5181275.6391,Colombo Street / Bealey Avenue
+I2956,-43.52440344,172.63660362,Colombo,Salisbury,,,3946,1570633.2882,5180884.2802,Colombo Street / Salisbury Street
+I2957,-43.52550414,172.63660872,Colombo,Peterborough,,,3947,1570634.2348,5180762.0398,Colombo Street / Peterborough Street
+I2958,-43.52658421,172.63661116,Colombo,Kilmore,,,3948,1570634.956,5180642.0892,Colombo Street / Kilmore Street
+I2959,-43.52876151,172.63661592,Armagh,Colombo,,,3953,1570636.3968,5180400.283,Colombo Street / Armagh Street
+I2961,-43.52985240,172.63662311,Colombo,Gloucester,,,3955,1570637.5067,5180279.1326,Colombo Street / Gloucester Street
+I2963,-43.53203522,172.63662486,Cathedral,Colombo,Hereford,High,3956,1570638.7074,5180036.7122,Colombo Street / Hereford Street / High Street
+I2966,-43.53312891,172.63662425,Cashel,Colombo,,,3957,1570639.1883,5179915.2479,Colombo Street / Cashel Street
+I2967,-43.53423421,172.63663422,Colombo,Lichfield,,,3961,1570640.5304,5179792.4979,Colombo Street / Lichfield Street
+I2968,-43.53530451,172.63663698,Colombo,Tuam,,,3963,1570641.2726,5179673.6328,Colombo Street / Tuam Street
+I2970,-43.53639567,172.63663888,Colombo,St Asaph,,,3965,1570641.9555,5179552.4508,Colombo Street / St Asaph Street
+I2976,-43.53993495,172.63665203,Colombo,Moorhouse,,,3971,1570644.7348,5179159.3867,Colombo Street / Moorhouse Avenue
+I3043,-43.52087534,172.63808853,Bealey,Sherborne,,,4042,1570751.5827,5181276.629,Bealey Avenue / Sherborne Street
+I3063,-43.52875993,172.63870306,Armagh,New Regent,,,4070,1570805.0493,5180401.1936,Armagh Street / New Regent Street
+I3064,-43.52984975,172.63870100,Gloucester,New Regent,,,4071,1570805.4087,5180280.1585,Gloucester Street / New Regent Street
+I3088,-43.52087422,172.63962245,Bealey,Manchester,,,4101,1570875.5484,5181277.2918,Manchester Street / Bealey Avenue
+I3093,-43.52657835,172.63962638,Kilmore,Manchester,,,4106,1570878.6093,5180643.7997,Manchester Street / Kilmore Street
+I3096,-43.52875962,172.63967710,Armagh,Manchester,,,4111,1570883.7573,5180401.5685,Manchester Street / Armagh Street
+I3097,-43.53094468,172.63968340,Manchester,Worcester,,,4116,1570885.3174,5180158.9011,Worcester Street / Manchester Street
+I3098,-43.52985171,172.63968430,Gloucester,Manchester,,,4114,1570884.8644,5180280.2851,Gloucester Street / Manchester Street
+I3100,-43.53312209,172.63969647,Cashel,Manchester,,,4126,1570887.4212,5179917.0851,Cashel Street / Manchester Street
+I3104,-43.53530046,172.63966638,Manchester,Tuam,,,4119,1570886.0377,5179675.1478,Manchester Street / Tuam Street
+I3105,-43.53421612,172.63964454,High,Lichfield,Manchester,,4110,1570883.7511,5179795.5655,Manchester Street / High Street / Lichfield Street
+I3107,-43.53639221,172.63965699,Manchester,St Asaph,,,4118,1570885.8041,5179553.8959,Manchester Street / St Asaph Street
+I3112,-43.53992779,172.63964455,Manchester,Moorhouse,Pilgrim,,4123,1570886.5008,5179161.234,Moorhouse Avenue / Manchester Street / Pilgrim Place
+I3154,-43.53529913,172.64115822,High,Tuam,,,4183,1571006.574,5179675.8166,Tuam Street / High Street
+I3171,-43.53094829,172.64202904,Latimer,Worcester,,,4203,1571074.854,5180159.318,Worcester Street / Latimer Square
+I3171,-43.53093246,172.64329451,Latimer,Worcester,,,4284,1571177.1006,5180161.5154,Worcester Street / Latimer Square
+I3195,-43.52439481,172.64263385,Madras,Salisbury,,,4240,1571120.5986,5180887.3496,Madras Street / Salisbury Street
+I3198,-43.52087167,172.64264826,Bealey,Madras,,,4239,1571120.0824,5181278.6295,Madras Street / Bealey Avenue
+I3200,-43.52657186,172.64263888,Kilmore,Madras,,,4243,1571122.0437,5180645.5713,Madras Street / Kilmore Street
+I3201,-43.52765026,172.64264327,Chester East,Madras,,,4245,1571122.9127,5180525.8064,Madras Street / Chester Street East
+I3208,-43.53311555,172.64266128,Cashel,Madras,,,4249,1571126.9749,5179918.8446,Cashel Street / Madras Street
+I3210,-43.53420485,172.64266260,Lichfield,Madras,,,4251,1571127.6013,5179797.8691,Madras Street / Lichfield Street
+I3212,-43.53529410,172.64267266,Madras,Tuam,,,4255,1571128.9343,5179676.9019,Madras Street / Tuam Street
+I3213,-43.53641672,172.64267255,High,Madras,St Asaph,,4256,1571129.4605,5179552.2241,Madras Street / St Asaph Street / High Street
+I3220,-43.53529127,172.64568641,Barbadoes,Tuam,,,4377,1571372.4359,5179678.258,Barbadoes Street / Tuam Street
+I3221,-43.53992947,172.64274244,Gasson,Madras,Moorhouse,,4269,1571136.7832,5179162.1272,Madras Street / Moorhouse Avenue / Gasson Street
+I3238,,,Gloucester,Latimer,Madras,,,,,
+I3239,-43.53094829,172.64202904,Latimer,Worcester,,,4203,1571074.854,5180159.318,Worcester Street / Latimer Square
+I3239,-43.53093246,172.64329451,Latimer,Worcester,,,4284,1571177.1006,5180161.5154,Worcester Street / Latimer Square
+I3240,,,Hereford,Latimer,Madras,,,,,
+I3255,-43.52655916,172.64426971,Kilmore,Oxford,,,4313,1571253.8229,5180647.546,Oxford Terrace / Kilmore Street
+I3255,-43.52655463,172.64992444,Kilmore,Oxford,,,4523,1571710.7737,5180649.9882,Oxford Terrace / Kilmore Street
+I3258,-43.53643393,172.64386760,Ferry,St Asaph,,,4303,1571226.0237,5179550.7278,Ferry Road / St Asaph Street
+I3303,-43.52436797,172.64564756,Barbadoes,Salisbury,,,4357,1571364.1293,5180891.3725,Barbadoes Street / Salisbury Street
+I3304,-43.52086579,172.64566828,Barbadoes,Bealey,,,4358,1571364.1475,5181280.3259,Barbadoes Street / Bealey Avenue
+I3307,-43.52655951,172.64565627,Barbadoes,Kilmore,,,4363,1571365.8698,5180647.9858,Barbadoes Street / Kilmore Street
+I3314,-43.53093128,172.64567089,Barbadoes,Worcester,,,4370,1571369.119,5180162.4669,Worcester Street / Barbadoes Street
+I3315,-43.53201935,172.64567525,Barbadoes,Hereford,,,4372,1571369.986,5180041.629,Barbadoes Street / Hereford Street
+I3317,-43.52983912,172.64566904,Barbadoes,Gloucester,,,4369,1571368.4531,5180283.7609,Gloucester Street / Barbadoes Street
+I3320,-43.53529127,172.64568641,Barbadoes,Tuam,,,4377,1571372.4359,5179678.258,Barbadoes Street / Tuam Street
+I3322,-43.53638445,172.64568811,Barbadoes,St Asaph,,,4378,1571373.0898,5179556.8512,Barbadoes Street / St Asaph Street
+I3323,-43.53708582,172.64569709,Barbadoes,Ferry,,,4379,1571374.1471,5179478.9605,Ferry Road / Barbadoes Street
+I3325,-43.53993121,172.64569558,Barbadoes,Moorhouse,Waltham,,4381,1571375.3717,5179162.9539,Barbadoes Street / Moorhouse Avenue / Waltham Road
+I3457,-43.52655916,172.64426971,Kilmore,Oxford,,,4313,1571253.8229,5180647.546,Oxford Terrace / Kilmore Street
+I3457,-43.52655463,172.64992444,Kilmore,Oxford,,,4523,1571710.7737,5180649.9882,Oxford Terrace / Kilmore Street
+I3475,-43.52084970,172.65050074,Bealey,Fitzgerald,London,Whitmore,4550,1571754.6822,5181283.7653,Bealey Avenue / Fitzgerald Avenue / London Street / Whitmore Street
+I3484,-43.52657032,172.65055641,Avonside,Fitzgerald,Kilmore,,4562,1571761.8498,5180648.4601,Avonside Drive / Fitzgerald Avenue / Kilmore Street
+I3485,-43.52983131,172.65052954,Fitzgerald,Gloucester,,,4557,1571761.2004,5180286.289,Gloucester Street / Fitzgerald Avenue
+I3486,-43.53092350,172.65053804,Fitzgerald,Worcester,,,4563,1571762.396,5180164.9951,Worcester Street / Fitzgerald Avenue
+I3488,-43.53310929,172.65055380,Cashel,Fitzgerald,,,4566,1571764.6897,5179922.2495,Cashel Street / Fitzgerald Avenue
+I3489,-43.53202446,172.65054650,Fitzgerald,Hereford,,,4564,1571763.5933,5180042.7264,Hereford Street / Fitzgerald Avenue
+I3490,-43.53420509,172.65056253,Fitzgerald,Lichfield,,,4570,1571765.9066,5179800.554,Fitzgerald Avenue / Lichfield Street
+I3492,-43.53528340,172.65054542,Fitzgerald,Tuam,,,4567,1571765.0269,5179680.7923,Tuam Street / Fitzgerald Avenue
+I3492,-43.53547593,172.65054702,Fitzgerald,Tuam,,,4569,1571765.2457,5179659.4111,Tuam Street / Fitzgerald Avenue
+I3494,-43.53827977,172.65056118,Ferry,Fitzgerald,,,4576,1571767.6979,5179348.024,Ferry Road / Fitzgerald Avenue
+I3497,-43.53638569,172.65055456,Fitzgerald,St Asaph,,,4571,1571766.2796,5179558.3769,St Asaph Street / Fitzgerald Avenue
+I3502,-43.53991556,172.65056897,Falsgrave,Fitzgerald,Moorhouse,,4578,1571769.0905,5179166.3579,Moorhouse Avenue / Fitzgerald Avenue / Falsgrave Street

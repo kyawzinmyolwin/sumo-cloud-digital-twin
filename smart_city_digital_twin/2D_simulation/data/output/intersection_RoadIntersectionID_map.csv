@@ -1,0 +1,102 @@
+intersection_id,street_1,street_2,street_3,street_4,RoadIntersectionID,IntersectionName,status
+I2537,Bealey,Carlton Mill,Harper,Park,3456,Bealey Avenue / Park Terrace / Carlton Mill Road / Harper Avenue,matched
+I2554,Hagley,Oxford,Riccarton,Tuam,3477,Hagley Avenue / Tuam Street / Oxford Terrace / Riccarton Avenue,matched
+I2605,Armagh,Hagley Park,Park,Rolleston,3530,Armagh Street / Park Terrace / Rolleston Avenue,manual_override
+I2606,Rolleston,Worcester,,,3529,Worcester Street / Rolleston Avenue,matched
+I2610,Antigua,Tuam,,,3533,Tuam Street / Antigua Street,matched
+I2611,Antigua,St Asaph,,,3534,St Asaph Street / Antigua Street,matched
+I2621,Hagley,Park,Salisbury,,,,unmatched
+I2629,Antigua,Moorhouse,,,3548,Moorhouse Avenue / Antigua Street,matched
+I2632,Bealey,Papanui,Victoria,,3552,Papanui Road / Bealey Avenue / Victoria Street,matched
+I2712,Bealey,Montreal,,,3649,Montreal Street / Bealey Avenue,matched
+I2715,Montreal,Salisbury,Victoria,,3652,Montreal Street / Salisbury Street / Victoria Street,matched
+I2716,Gloucester,Montreal,,,3654,Gloucester Street / Montreal Street,matched
+I2718,Montreal,Worcester,,,3655,Worcester Street / Montreal Street,matched
+I2719,Hereford,Montreal,,,3656,Hereford Street / Montreal Street,matched
+I2727,Montreal,St Asaph,,,3666,St Asaph Street / Montreal Street,matched
+I2728,Montreal,Tuam,,,3662,Tuam Street / Montreal Street,matched
+I2731,Montreal,Moorhouse,,,3671,Moorhouse Avenue / Montreal Street,matched
+I2754,Cranmer,Kilmore,Montreal,,,,unmatched
+I2755,Armagh,Cranmer,Montreal,,,,unmatched
+I2814,Cambridge,Worcester,,,3769,Worcester Street / Cambridge Terrace,matched
+I2815,Cambridge,Hereford,,,3772,Hereford Street / Cambridge Terrace,matched
+I2832,Cambridge,Durham North,Gloucester,,3793,Gloucester Street / Durham Street North / Cambridge Terrace,matched
+I2836,Bealey,Durham North,,,3799,Durham Street North / Bealey Avenue,matched
+I2840,Durham North,Salisbury,,,3804,Durham Street North / Salisbury Street,matched
+I2843,Cambridge,Durham South,Lichfield,Oxford,3800,Oxford Terrace / Lichfield Street / Durham Street South,manual_override
+I2848,Durham North,Kilmore,Victoria,,3809,Durham Street North / Kilmore Street / Victoria Street,matched
+I2849,Armagh,Durham North,,,3812,Armagh Street / Durham Street North,matched
+I2850,Durham South,Tuam,,,3813,Tuam Street / Durham Street South,matched
+I2853,Durham South,St Asaph,,,3826,St Asaph Street / Durham Street South,matched
+I2859,Durham South,Moorhouse,,,3822,Moorhouse Avenue / Durham Street South,matched
+I2874,Hereford,Oxford,,,3841,Hereford Street / Oxford Terrace,matched
+I2906,Armagh,Oxford,,,3886,Armagh Street / Oxford Terrace,matched
+I2953,Bealey,Colombo,,,3943,Colombo Street / Bealey Avenue,matched
+I2956,Colombo,Salisbury,,,3946,Colombo Street / Salisbury Street,matched
+I2957,Colombo,Peterborough,,,3947,Colombo Street / Peterborough Street,matched
+I2958,Colombo,Kilmore,,,3948,Colombo Street / Kilmore Street,matched
+I2959,Armagh,Colombo,,,3953,Colombo Street / Armagh Street,matched
+I2961,Colombo,Gloucester,,,3955,Colombo Street / Gloucester Street,matched
+I2963,Cathedral,Colombo,Hereford,High,3956,Colombo Street / Hereford Street / High Street,manual_override
+I2966,Cashel,Colombo,,,3957,Colombo Street / Cashel Street,matched
+I2967,Colombo,Lichfield,,,3961,Colombo Street / Lichfield Street,matched
+I2968,Colombo,Tuam,,,3963,Colombo Street / Tuam Street,matched
+I2970,Colombo,St Asaph,,,3965,Colombo Street / St Asaph Street,matched
+I2976,Colombo,Moorhouse,,,3971,Colombo Street / Moorhouse Avenue,matched
+I3043,Bealey,Sherborne,,,4042,Bealey Avenue / Sherborne Street,matched
+I3063,Armagh,New Regent,,,4070,Armagh Street / New Regent Street,matched
+I3064,Gloucester,New Regent,,,4071,Gloucester Street / New Regent Street,matched
+I3088,Bealey,Manchester,,,4101,Manchester Street / Bealey Avenue,matched
+I3093,Kilmore,Manchester,,,4106,Manchester Street / Kilmore Street,matched
+I3096,Armagh,Manchester,,,4111,Manchester Street / Armagh Street,matched
+I3097,Manchester,Worcester,,,4116,Worcester Street / Manchester Street,matched
+I3098,Gloucester,Manchester,,,4114,Gloucester Street / Manchester Street,matched
+I3100,Cashel,Manchester,,,4126,Cashel Street / Manchester Street,matched
+I3104,Manchester,Tuam,,,4119,Manchester Street / Tuam Street,matched
+I3105,High,Lichfield,Manchester,,4110,Manchester Street / High Street / Lichfield Street,matched
+I3107,Manchester,St Asaph,,,4118,Manchester Street / St Asaph Street,matched
+I3112,Manchester,Moorhouse,Pilgrim,,4123,Moorhouse Avenue / Manchester Street / Pilgrim Place,matched
+I3154,High,Tuam,,,4183,Tuam Street / High Street,matched
+I3171,Latimer,Worcester,,,4203,Worcester Street / Latimer Square,ambiguous
+I3171,Latimer,Worcester,,,4284,Worcester Street / Latimer Square,ambiguous
+I3195,Madras,Salisbury,,,4240,Madras Street / Salisbury Street,matched
+I3198,Bealey,Madras,,,4239,Madras Street / Bealey Avenue,matched
+I3200,Kilmore,Madras,,,4243,Madras Street / Kilmore Street,matched
+I3201,Chester East,Madras,,,4245,Madras Street / Chester Street East,matched
+I3208,Cashel,Madras,,,4249,Cashel Street / Madras Street,matched
+I3210,Lichfield,Madras,,,4251,Madras Street / Lichfield Street,matched
+I3212,Madras,Tuam,,,4255,Madras Street / Tuam Street,matched
+I3213,High,Madras,St Asaph,,4256,Madras Street / St Asaph Street / High Street,matched
+I3220,Barbadoes,Tuam,,,4377,Barbadoes Street / Tuam Street,matched
+I3221,Gasson,Madras,Moorhouse,,4269,Madras Street / Moorhouse Avenue / Gasson Street,matched
+I3238,Gloucester,Latimer,Madras,,,,unmatched
+I3239,Latimer,Worcester,,,4203,Worcester Street / Latimer Square,ambiguous
+I3239,Latimer,Worcester,,,4284,Worcester Street / Latimer Square,ambiguous
+I3240,Hereford,Latimer,Madras,,,,unmatched
+I3255,Kilmore,Oxford,,,4313,Oxford Terrace / Kilmore Street,ambiguous
+I3255,Kilmore,Oxford,,,4523,Oxford Terrace / Kilmore Street,ambiguous
+I3258,Ferry,St Asaph,,,4303,Ferry Road / St Asaph Street,matched
+I3303,Barbadoes,Salisbury,,,4357,Barbadoes Street / Salisbury Street,matched
+I3304,Barbadoes,Bealey,,,4358,Barbadoes Street / Bealey Avenue,matched
+I3307,Barbadoes,Kilmore,,,4363,Barbadoes Street / Kilmore Street,matched
+I3314,Barbadoes,Worcester,,,4370,Worcester Street / Barbadoes Street,matched
+I3315,Barbadoes,Hereford,,,4372,Barbadoes Street / Hereford Street,matched
+I3317,Barbadoes,Gloucester,,,4369,Gloucester Street / Barbadoes Street,matched
+I3320,Barbadoes,Tuam,,,4377,Barbadoes Street / Tuam Street,matched
+I3322,Barbadoes,St Asaph,,,4378,Barbadoes Street / St Asaph Street,matched
+I3323,Barbadoes,Ferry,,,4379,Ferry Road / Barbadoes Street,matched
+I3325,Barbadoes,Moorhouse,Waltham,,4381,Barbadoes Street / Moorhouse Avenue / Waltham Road,matched
+I3457,Kilmore,Oxford,,,4313,Oxford Terrace / Kilmore Street,ambiguous
+I3457,Kilmore,Oxford,,,4523,Oxford Terrace / Kilmore Street,ambiguous
+I3475,Bealey,Fitzgerald,London,Whitmore,4550,Bealey Avenue / Fitzgerald Avenue / London Street / Whitmore Street,matched
+I3484,Avonside,Fitzgerald,Kilmore,,4562,Avonside Drive / Fitzgerald Avenue / Kilmore Street,matched
+I3485,Fitzgerald,Gloucester,,,4557,Gloucester Street / Fitzgerald Avenue,matched
+I3486,Fitzgerald,Worcester,,,4563,Worcester Street / Fitzgerald Avenue,matched
+I3488,Cashel,Fitzgerald,,,4566,Cashel Street / Fitzgerald Avenue,matched
+I3489,Fitzgerald,Hereford,,,4564,Hereford Street / Fitzgerald Avenue,matched
+I3490,Fitzgerald,Lichfield,,,4570,Fitzgerald Avenue / Lichfield Street,matched
+I3492,Fitzgerald,Tuam,,,4567,Tuam Street / Fitzgerald Avenue,ambiguous
+I3492,Fitzgerald,Tuam,,,4569,Tuam Street / Fitzgerald Avenue,ambiguous
+I3494,Ferry,Fitzgerald,,,4576,Ferry Road / Fitzgerald Avenue,matched
+I3497,Fitzgerald,St Asaph,,,4571,St Asaph Street / Fitzgerald Avenue,matched
+I3502,Falsgrave,Fitzgerald,Moorhouse,,4578,Moorhouse Avenue / Fitzgerald Avenue / Falsgrave Street,matched

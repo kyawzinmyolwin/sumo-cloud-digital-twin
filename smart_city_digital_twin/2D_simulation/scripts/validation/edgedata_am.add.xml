@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edgeData collector for model validation (AM peak 06:30-07:30 = sim seconds 23400-27000).
+     Pass this as an EXTRA additional-file to a baseline run; it writes per-edge counts
+     (departed / entered / left / arrived) that validate_against_counts.py compares to the
+     real counts. See docs/VALIDATION.md. -->
+<additional>
+    <edgeData id="val_am" file="edgedata_am.out.xml" begin="23400" end="27000"/>
+</additional>

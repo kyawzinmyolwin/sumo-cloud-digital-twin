@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+    <input>
+        <net-file value="data/output/network/Christchurch_Central_City_main_streets.net.xml" />
+        <route-files value="data/output/demand/traffic_trips.routed.rou.xml" />
+        <additional-files value="data/output/network/Christchurch_Central_City_main_streets.add.xml" />
+    </input>
+    <time>
+        <begin value="23400" />
+        <end value="86400" />
+        <step-length value="1" />
+    </time>
+</sumoConfiguration>

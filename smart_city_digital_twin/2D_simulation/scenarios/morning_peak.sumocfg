@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- MORNING-PEAK scenario: the real network with only the vehicles departing in
+     the 08:00-08:30 AM peak (~6,200 vehicles). Compare against offpeak.sumocfg
+     (~3,200) for the scenario-comparison feature. Run with a matching jump-to of
+     28800 (see README) so real-time playback starts at 08:00 instead of idling
+     from the default 06:30 jump. Paths are relative to this file (scenarios/). -->
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+    <input>
+        <net-file value="../data/output/network/Christchurch_Central_City_main_streets.net.xml" />
+        <route-files value="morning_peak.rou.xml" />
+        <additional-files value="../data/output/network/Christchurch_Central_City_main_streets.add.xml" />
+    </input>
+    <time>
+        <begin value="28800" />
+        <end value="30600" />
+        <step-length value="1" />
+    </time>
+</sumoConfiguration>

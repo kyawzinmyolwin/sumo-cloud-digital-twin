@@ -1,0 +1,8 @@
+{
+  "_comment": "Example incident spec for the scenario/decision-support twin (Increment 1). Times are sim-time seconds; on the default calibrated run, 06:30 = 23400. Replace the edge ids with real ones from the net (netconvert/sumolib, or click an edge in sumo-gui). Run: python scripts/run_traci.py --no-gui --emit --emit-host 0.0.0.0 --jump-to 23400 --incident-file scripts/scenarios/incident_example.json",
+  "incidents": [
+    {"type": "close_edge", "edge": "REPLACE_EDGE_ID", "start": 23700, "end": 24300, "label": "crash on main approach 06:35-06:45"},
+    {"type": "set_speed", "edge": "REPLACE_EDGE_ID_2", "speed": 4.0, "start": 23400, "end": 25200, "label": "roadworks speed limit"},
+    {"type": "add_vehicles", "target": "REPLACE_FROM_EDGE", "to": "REPLACE_TO_EDGE", "count": 100, "start": 23400, "end": 24600, "label": "event surge toward venue"}
+  ]
+}

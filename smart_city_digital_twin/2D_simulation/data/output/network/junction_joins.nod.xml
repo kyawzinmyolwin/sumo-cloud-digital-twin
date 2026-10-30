@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/nodes_file.xsd">
+    <join nodes="31104856 cluster_1093722421_4948662314"/>
+    <join nodes="31064667 cluster_5317131190_7196771977"/>
+    <join nodes="31814650 cluster_13518425792_7198983682"/>
+</nodes>

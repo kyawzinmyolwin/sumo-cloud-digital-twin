@@ -1,0 +1,46 @@
+name: CI
+
+# Runs the Python unit tests on every push and pull request. The suites are pure
+# (fake traci / Popen / AWS via moto — no SUMO, no cloud, no network), so CI needs
+# only the test dependencies, not the runtime ones.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Unit tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    defaults:
+      run:
+        working-directory: smart_city_digital_twin/2D_simulation
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: smart_city_digital_twin/2D_simulation/requirements-dev.txt
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Run unit tests
+        run: python -m pytest scripts/tests scripts/etl/tests -q

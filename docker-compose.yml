@@ -1,0 +1,124 @@
+# One-command local demo stack for the Christchurch decision-support twin.
+#
+#   cp .env.example .env     # set INFLUXDB_PASSWORD (8+ chars) + INFLUXDB_TOKEN
+#   docker compose up        # builds the SUMO + app images, then runs everything
+#
+# Then open   http://localhost:8000/scripts/intersection_map.html
+# and click Connect in the live panel. History/Compare read from InfluxDB via the
+# replay service; the live feed comes straight from the sim container.
+#
+# Services (all local — no AWS, no cloud):
+#   influxdb  :8086  time-series store
+#   sim       :8765  SUMO + run_traci.py --emit (the live WebSocket feed)
+#   writer           metrics_writer.py: sim feed -> InfluxDB (no published port)
+#   replay    :8788  HTTP read endpoint the dashboard's History/Compare call
+#   web       :8000  serves the dashboard (intersection_map.html) + data files
+#
+# Code + data are bind-mounted from the repo (the 2D_simulation tree is large, so
+# it isn't baked into the images); the images carry only the runtimes. Stop with
+# `docker compose down` (data kept) or `docker compose down -v` (wipe InfluxDB).
+name: cdt
+
+services:
+  influxdb:
+    image: influxdb:2.7
+    container_name: cdt-influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USERNAME:-admin}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD:?set INFLUXDB_PASSWORD in .env (min 8 chars)}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG:-christchurch}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET:-traffic-metrics}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN:?set INFLUXDB_TOKEN in .env}
+      DOCKER_INFLUXDB_INIT_RETENTION: ${INFLUXDB_RETENTION:-30d}
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+    healthcheck:
+      test: ["CMD", "influx", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  sim:
+    build:
+      context: .
+      dockerfile: docker/sim.Dockerfile
+    image: cdt-sim
+    container_name: cdt-sim
+    working_dir: /app
+    volumes:
+      # rw: SUMO may write run output under data/output.
+      - ./smart_city_digital_twin/2D_simulation:/app
+    ports:
+      - "8765:8765"
+    # A clean finish (end of the run window) should not loop; retry only on error.
+    restart: on-failure
+
+  writer:
+    build:
+      context: .
+      dockerfile: docker/app.Dockerfile
+    image: cdt-app
+    container_name: cdt-writer
+    working_dir: /app
+    depends_on:
+      influxdb:
+        condition: service_healthy
+      sim:
+        condition: service_started
+    environment:
+      INFLUXDB_URL: http://influxdb:8086
+      INFLUXDB_ORG: ${INFLUXDB_ORG:-christchurch}
+      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:-traffic-metrics}
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?set INFLUXDB_TOKEN in .env}
+    volumes:
+      - ./smart_city_digital_twin/2D_simulation:/app:ro
+    # Connects to the sim over the compose network (retries until the sim is up).
+    command: ["python3", "scripts/metrics_writer.py", "--ws-url", "ws://sim:8765"]
+    restart: unless-stopped
+
+  replay:
+    build:
+      context: .
+      dockerfile: docker/app.Dockerfile
+    image: cdt-app
+    container_name: cdt-replay
+    working_dir: /app
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    environment:
+      INFLUXDB_URL: http://influxdb:8086
+      INFLUXDB_ORG: ${INFLUXDB_ORG:-christchurch}
+      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:-traffic-metrics}
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?set INFLUXDB_TOKEN in .env}
+    volumes:
+      - ./smart_city_digital_twin/2D_simulation:/app:ro
+    ports:
+      - "8788:8788"
+    command: ["python3", "scripts/replay_server.py", "--host", "0.0.0.0", "--port", "8788"]
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/app.Dockerfile
+    image: cdt-app
+    container_name: cdt-web
+    working_dir: /app
+    volumes:
+      - ./smart_city_digital_twin/2D_simulation:/app:ro
+    ports:
+      - "8000:8000"
+    # Serves /app so the map's ../data/output/* fetches resolve at
+    # http://localhost:8000/scripts/intersection_map.html
+    command: ["python3", "-m", "http.server", "8000", "--bind", "0.0.0.0"]
+    restart: unless-stopped
+
+volumes:
+  influxdb-data:
+  influxdb-config:

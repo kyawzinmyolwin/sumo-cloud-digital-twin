@@ -1,0 +1,78 @@
+name: Deploy live dashboard to GitHub Pages
+
+# Publishes the Leaflet + Chart.js live map as a static site.
+#
+# One-time setup: in the repo, Settings → Pages → "Build and deployment" →
+# Source = "GitHub Actions" (this workflow provides the deployment).
+#
+# The published site preserves the map's relative layout so its
+# `../data/output/intersection_geo.csv` fetch resolves:
+#   /scripts/intersection_map.html
+#   /data/output/intersection_geo.csv
+#   /index.html   -> redirects to scripts/intersection_map.html
+#
+# The map defaults to ws://localhost:8765; point it at a deployed emitter with
+# the ?ws= (and optional ?api=) URL parameters once those endpoints exist.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "smart_city_digital_twin/2D_simulation/scripts/intersection_map.html"
+      - "smart_city_digital_twin/2D_simulation/data/output/intersection_geo.csv"
+      - ".github/workflows/deploy-dashboard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; don't cancel an in-progress publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble static site
+        run: |
+          set -euo pipefail
+          src="smart_city_digital_twin/2D_simulation"
+          mkdir -p site/scripts site/data/output
+          cp "$src/scripts/intersection_map.html" site/scripts/intersection_map.html
+          cp "$src/data/output/intersection_geo.csv" site/data/output/intersection_geo.csv
+          cat > site/index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="refresh" content="0; url=scripts/intersection_map.html" />
+            <title>Christchurch live traffic dashboard</title>
+          </head>
+          <body>
+            <p>Redirecting to <a href="scripts/intersection_map.html">the live map</a>…</p>
+          </body>
+          </html>
+          HTML
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
