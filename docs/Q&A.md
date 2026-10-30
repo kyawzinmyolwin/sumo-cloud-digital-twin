@@ -511,3 +511,46 @@ AWS — API Gateway is the hub
   both clients of API Gateway and fan-out goes only *to* browsers, so there's no path back to the
   producer. Closing that gap means a Lambda pushing the command to the emitter's connection
   (`postToConnection`) — the "cloud live-inject" item in CHECKLIST.md.
+
+## Q10. Why use API Gateway's WebSocket API for the live feed? What were the alternatives, and why weren't they chosen?
+
+**Short answer:** the live map needs the server to **push** every tick to the browser, it must cost
+about nothing when idle, and there should be no server to run. The WebSocket API is the option that
+meets all of that *and* keeps the same protocol as the local setup.
+
+**What the live path had to do:**
+1. **Push to browsers in near real time** — several messages a second, without the browser asking.
+2. **Accept data from a producer behind NAT** — the emitter dials out; nothing dials in (Q9).
+3. **Cost ~$0 when idle** — a student project with a US$5 billing alarm that sits idle most days.
+4. **No servers to patch, all defined in Terraform.**
+5. **Same protocol as local** — the dashboard's WebSocket client works unchanged against
+   `ws://localhost:8765` and `wss://…/prod`, so one front end serves both modes.
+
+**Alternatives and why not:**
+
+| Option | What it would look like | Why not |
+|---|---|---|
+| **HTTP API + browser polling** | Emitter POSTs snapshots; browser polls for the latest | Polling adds lag and wasted requests (5 Hz × every viewer) and needs a "latest snapshot" store. *Right* for history — which is why replay uses an HTTP API. |
+| **Server-Sent Events** | One-way push stream to the browser | API Gateway doesn't support long-lived SSE; Lambda response streaming needs Function URLs (403 on this account). One-way, so no future control path. |
+| **Own WebSocket server on EC2 / Fargate** | Run a relay (or the emitter) publicly | Closest to the local code, but always-on cost (~US$8–30/month), TLS certificates, patching, an open inbound port, a single point of failure — breaks the ~US$1–2/month idle target. |
+| **AWS IoT Core (MQTT over WebSockets)** | Managed publish/subscribe | Built for this fan-out, but browser auth needs Cognito or signed requests, and MQTT is a second protocol. Overkill for one producer and a few viewers. |
+| **AppSync (GraphQL subscriptions / AppSync Events)** | Managed real-time publish/subscribe | Credible — AppSync Events is a close fit today. GraphQL adds schema overhead; API Gateway + Lambda + DynamoDB shows more transferable patterns with explicit control. |
+| **Kinesis Data Streams / Firehose** | Streaming ingestion | Great for high-volume ingest/analytics, but can't push to browsers (still need a delivery layer); provisioned shards bill around the clock. |
+| **Pusher / Ably / Firebase** | Third-party real-time service | Easy, but outside AWS (the platform + IaC choice), vendor free-tier limits, less to demonstrate. |
+| **SQS / SNS** | Managed queue / notifications | Neither delivers to browsers. |
+
+The rationale recorded in CLAUDE.md's decisions table is the WebSocket API's free tier (1M messages
+and 750k connection-minutes a month for 12 months); the table above is the fuller argument.
+
+**Costs accepted (say these before being asked):**
+- **Hand-written fan-out** — a DynamoDB connections table and `postToConnection` once per viewer per
+  tick, so work grows with viewers × tick rate. Fine at demo scale.
+- **Hard limits** — 128 KB per message (hence throttling; a ~600-vehicle snapshot is ~50 KB);
+  connections close after 10 minutes idle or 2 hours total, so clients need reconnect logic (the
+  forwarder has it).
+- **Pay per message past the free tier** — at city scale with many viewers, managed publish/subscribe
+  (IoT Core or AppSync Events) would beat hand-rolled fan-out. That's the honest "what changes at
+  scale" answer.
+
+**Viva framing:** match the tool to the job — **push for live data, request/response for history.**
+That's why the system has a WebSocket API *and* two HTTP APIs (replay, control), each where it fits.
