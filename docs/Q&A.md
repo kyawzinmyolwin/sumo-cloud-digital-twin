@@ -554,3 +554,43 @@ and 750k connection-minutes a month for 12 months); the table above is the fulle
 
 **Viva framing:** match the tool to the job — **push for live data, request/response for history.**
 That's why the system has a WebSocket API *and* two HTTP APIs (replay, control), each where it fits.
+
+## Q11. When 10 browsers are connected, how does `traffic-ingest` know where to send a new snapshot so all 10 receive it?
+
+**It keeps its own guest list.** API Gateway doesn't broadcast; it only gives every connection a
+unique **connectionId**. `traffic-ingest` records each id in DynamoDB as it connects, and on every
+snapshot it walks that list and sends to each one.
+
+1. **Join on connect.** A browser opening `wss://…/prod` triggers `$connect`; the Lambda writes its
+   connectionId to the DynamoDB connections table (`put_item`). `$disconnect` deletes it. With 10
+   browsers open the table holds **11 ids** — the 10 browsers plus the emitter, which connected the
+   same way.
+2. **Snapshot arrives.** The emitter sends `{"action":"sendmessage","data":{…}}`; API Gateway routes it
+   to `traffic-ingest` with the **sender's connectionId** in the event.
+3. **Metrics, separately.** The Lambda async-invokes `traffic-metrics` (`InvocationType="Event"`), so
+   the InfluxDB write never slows the broadcast.
+4. **Fan-out (`_broadcast`).** It builds the API Gateway management endpoint
+   (`https://{domainName}/{stage}`), **scans** DynamoDB for every connectionId, **skips the sender**
+   (the emitter doesn't get its own snapshot back), and calls `post_to_connection` once for each of
+   the other **10**.
+5. **Cleanup.** A browser that vanished without a clean `$disconnect` makes the post fail with
+   `GoneException`; the Lambda deletes that id, so the list stays accurate with no cleanup job.
+
+```
+emitter ──sendmessage──► API Gateway ──► traffic-ingest
+                                          ├─ async ─► traffic-metrics ─► InfluxDB Cloud
+                                          ├─ scan DynamoDB → [emitter, b1 … b10]
+                                          └─ skip emitter; post_to_connection × 10 ──► API Gateway ──► b1 … b10
+```
+
+**As the audience grows:**
+- **Cost grows with viewers.** Each snapshot = one scan + one HTTPS call *per browser*, sent one after
+  another. 10 viewers → 10 posts per tick; 1,000 → 1,000.
+- **The scan isn't paginated.** A single DynamoDB scan returns at most 1 MB — thousands of ids, fine
+  here, but large scale would need pagination (or a query) and parallel posts.
+- That's the Q10 trade-off: API Gateway offers per-connection pushes but no "send to everyone" call.
+  At large scale, managed publish/subscribe (IoT Core, AppSync Events) does the fan-out for you.
+
+**Viva one-liner:** "API Gateway only knows connection ids, so the ingest Lambda keeps them in
+DynamoDB; on every snapshot it scans the table and posts to each id except the sender, deleting any
+that have gone away."
