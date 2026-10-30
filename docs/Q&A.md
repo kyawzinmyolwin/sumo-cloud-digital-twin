@@ -469,3 +469,45 @@ the cloud uses *Start road block* instead.
 **Scope:** local `--emit` path only. The cloud feed is one-way fan-out (forward-only `--emit-target`),
 so live click-to-inject over AWS is a deferred build (Q3 / CHECKLIST "Planned improvements"); the cloud
 equivalent today is **Start road block**, which starts a fresh run with the edge closed from the start.
+
+## Q9. Locally `run_traci.py --emit` hosts a WebSocket server. Why does the AWS version need the emitter to be a WebSocket *client* (`--emit-target`)?
+
+**Because the hub moves.** Someone has to be the server everyone else connects to. Locally that's
+the emitter; in AWS it's API Gateway — and API Gateway only *accepts* connections, it never dials out.
+So the emitter joins as one more client.
+
+```
+LOCAL — emitter is the hub
+  browser ──┐
+  browser ──┼──► emitter  ws://host:8765   (listens)
+  writer  ──┘
+
+AWS — API Gateway is the hub
+  emitter ──┐
+  browser ──┼──► API Gateway  wss://…/prod  (listens) ──► Lambdas
+  browser ──┘
+```
+
+**Why it must be that way:**
+1. **API Gateway can't connect to the emitter.** A WebSocket API is a public endpoint clients connect
+   *in* to; it has no way to open a socket to a backend WebSocket server. Each incoming message
+   invokes a Lambda by route, so the emitter has to connect and post on the `sendmessage` route —
+   hence the `{"action":"sendmessage","data":{…}}` wrapper (route selection is `$request.body.action`).
+2. **The emitter usually isn't reachable from the internet.** It runs on a laptop, the VM or the EC2
+   sim host, behind NAT/firewalls. Dialing *out* passes through those; *listening* would need an open
+   inbound port. The sim host deliberately has **no open ports** (access is via SSM) — client mode is
+   what makes that possible.
+3. **The emitter shouldn't serve every viewer.** Locally it pushes each tick to every connected
+   browser itself, which is fine for one or two. In the cloud it keeps **one** upstream connection
+   regardless of audience; API Gateway + `traffic-ingest` fan out, tracking viewers in DynamoDB.
+4. **Lambdas don't hold connections.** They run per message and exit; API Gateway is the only
+   long-lived piece, so it must own the sockets.
+
+**Consequences worth stating in the viva:**
+- **The two modes compose.** `--emit` (serve locally) and `--emit-target` (forward to the cloud) can
+  run together, so a local map and the hosted map can watch the same run.
+- **It's why "Close live" is local-only (Q3, Q8).** Locally the browser is connected straight to the
+  emitter, so control commands travel back up the same socket. In AWS the browser and the emitter are
+  both clients of API Gateway and fan-out goes only *to* browsers, so there's no path back to the
+  producer. Closing that gap means a Lambda pushing the command to the emitter's connection
+  (`postToConnection`) — the "cloud live-inject" item in CHECKLIST.md.
