@@ -28,19 +28,21 @@ flowchart LR
   end
   subgraph CLOUD["③ AWS cloud (ap-southeast-2)"]
     WSAPI["API Gateway<br/>WebSocket /prod"]
-    ING["traffic-ingest λ"]
     DDB[("DynamoDB<br/>connections")]
-    MET["traffic-metrics λ<br/>compute_tick_metrics()"]
     ICLOUD[("InfluxDB Cloud")]
     RAPI["API Gateway HTTP<br/>/metrics (replay)"]
-    REP["traffic-replay λ"]
     CAPI["API Gateway HTTP<br/>control"]
-    AUTH["control-authorizer λ<br/>(shared token)"]
-    CTRL["traffic-control λ"]
     SSM["AWS SSM"]
     S3H["S3 + CloudFront<br/>dashboard + data host"]
-    SEC[["Secrets Manager<br/>InfluxDB + control tokens"]]
-    CW["CloudWatch logs<br/>+ $5 billing alarm"]
+    SEC[["Secrets Manager<br/>InfluxDB token + Drive API key"]]
+    CW["CloudWatch Logs<br/>(logs from every λ)<br/>+ $5 billing alarm"]
+    subgraph LAMBDAS["Lambda functions"]
+      ING["traffic-ingest λ"]
+      MET["traffic-metrics λ<br/>compute_tick_metrics()"]
+      REP["traffic-replay λ"]
+      AUTH["control-authorizer λ<br/>(shared token in env var)"]
+      CTRL["traffic-control λ"]
+    end
     WSAPI --> ING
     ING -->|"register / fan-out"| DDB
     ING -->|"async invoke"| MET
@@ -55,19 +57,22 @@ flowchart LR
     LIVE["Live vehicle map"]
     HIST["History / Compare / Impact"]
     SCN["Scenario-control panel<br/>+ Close/Reopen"]
+    CNT["Intersection counts panel"]
   end
-  subgraph ETL["⑤ ETL / model build (offline)"]
+  subgraph ETL["⑤ ETL (scheduled in AWS) + offline model build"]
+    EB["EventBridge<br/>weekly schedule"]
     GD[("CCC Google Drive<br/>count workbooks")]
-    DC["drive_client.py"]
-    CE["counts_etl.py"]
+    DC["drive_client.py<br/>(etl-traffic-counts λ)"]
+    CE["counts_etl.py<br/>(etl-traffic-counts λ)"]
     S3E[("S3 raw / processed<br/>+ manifest")]
     SB["scenario_bridge.py"]
     DEM["demand CSV → duarouter<br/>→ *.rou.xml"]
-    QAPI["query API<br/>→ lambda_query"]
+    QAPI["Counts HTTP API<br/>→ query-traffic-counts λ"]
+    EB -->|"triggers"| DC
     GD -->|"HTTPS API key"| DC --> CE --> S3E --> SB --> DEM
     S3E --> QAPI
   end
-  EM -->|"live WS :8765"| LIVE
+  EM -->|"live WS :8765<br/>(local mode)"| LIVE
   EM -->|"WS :8765"| MW
   RS -->|"HTTP :8788"| HIST
   SCN -->|"HTTP :8799 (local)"| CS
@@ -75,14 +80,15 @@ flowchart LR
   CS -->|"spawns"| MW
   LIVE -.->|"control WS :8765"| EM
   CF -->|"wss /prod"| WSAPI
-  WSAPI -->|"fan-out WS"| LIVE
+  WSAPI -->|"fan-out WS<br/>(cloud mode)"| LIVE
   HIST -->|"HTTPS ?replay="| RAPI
-  SCN -->|"HTTPS + token"| CAPI
+  SCN -->|"HTTPS + Bearer token"| CAPI
+  CNT -->|"HTTPS ?counts="| QAPI
   SSM -->|"rewrite env + restart"| RT
   S3H -->|"HTTPS static + data"| DASH
-  MET -.->|"token"| SEC
-  REP -.->|"token"| SEC
-  CTRL -.->|"token"| SEC
+  MET -.->|"InfluxDB token"| SEC
+  REP -.->|"InfluxDB token"| SEC
+  DC -.->|"Drive API key"| SEC
   DEM -.->|"feeds baseline"| SUMO
   classDef prod fill:#e4f2f2,stroke:#0e7c7b,color:#123;
   classDef local fill:#e8eef7,stroke:#33527a,color:#123;
@@ -92,11 +98,21 @@ flowchart LR
   class SUMO,RT,EM,CF,INC prod;
   class MW,IDB,RS,CS local;
   class WSAPI,ING,DDB,MET,ICLOUD,RAPI,REP,CAPI,AUTH,CTRL,SSM,S3H,SEC,CW cloud;
-  class LIVE,HIST,SCN dash;
-  class GD,DC,CE,S3E,SB,DEM,QAPI etl;
+  class LIVE,HIST,SCN,CNT dash;
+  class EB,GD,DC,CE,S3E,SB,DEM,QAPI etl;
 ```
 
 > Static render (if your viewer doesn't render Mermaid): [`img/system_flow.png`](img/system_flow.png)
+
+**Reading notes**
+- **Live map: one feed at a time.** The local (`ws://…:8765`) and cloud (`wss://…/prod`) feeds are
+  alternatives, picked by the page's `?ws=` parameter.
+- **Control token** is a Lambda environment variable on `control-authorizer` (Terraform
+  `random_password`), not a Secrets Manager secret. Secrets Manager holds the InfluxDB Cloud token
+  and the Google Drive API key.
+- **CloudWatch** receives logs from every Lambda; its only alarm is the US$5 billing alarm.
+- **ETL ingest** runs in AWS on an EventBridge schedule (`etl_schedule_expression`, weekly by
+  default). The model build (`scenario_bridge` → `duarouter`) is run by hand.
 
 ## Ports at a glance
 
