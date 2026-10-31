@@ -701,3 +701,72 @@ PRESETS ──► run baseline_am ──┐                         ┌─► sc
   vehicle counts (Q7).
 - **One run per scenario** — reproducible (fixed seed) but a single sample. Several seeds with a
   reported range would be more rigorous.
+
+## Q13. How was AWS Secrets Manager set up from scratch, and where is it used?
+
+**Key idea: Terraform creates each secret empty; the secret's value never passes through Terraform.**
+
+**The two secrets**
+
+| Secret | Holds | Defined in | Read by |
+|---|---|---|---|
+| `christchurch-digital-twin-prod-influxdb-token` | InfluxDB Cloud API token | `infra/storage.tf` | `traffic-metrics` λ (write), `traffic-replay` λ (read) |
+| `…-drive-api-key` | Google Drive API key | `infra/etl.tf` | `etl-traffic-counts` λ (download council workbooks) |
+
+**Step by step**
+
+1. **Terraform creates the secret with no value.**
+   ```hcl
+   resource "aws_secretsmanager_secret" "influxdb_token" {
+     name                    = "${var.project}-${var.environment}-influxdb-token"
+     recovery_window_in_days = 7
+   }
+   ```
+   There is deliberately **no `aws_secretsmanager_secret_version`**. If Terraform managed the value,
+   the plain-text token would land in the Terraform state file in S3 (and possibly in
+   `terraform.tfvars` or shell history).
+2. **The value is set by hand, once, after `terraform apply`:**
+   ```bash
+   aws secretsmanager put-secret-value \
+     --secret-id "$(terraform output -raw influxdb_token_secret_name)" \
+     --secret-string 'YOUR_INFLUX_CLOUD_TOKEN'
+   ```
+   The Drive key is set the same way via the `drive_api_key_secret_name` output.
+3. **IAM lets each Lambda read exactly one secret.** The core Lambda role has a `ReadInfluxToken`
+   statement — `secretsmanager:GetSecretValue` on **that secret's ARN only**, not `*`. The ETL Lambda
+   has its own role that can read only the Drive key.
+4. **The Lambda gets the secret's address, not the secret.** Its environment variable is
+   `INFLUXDB_SECRET_ARN` (or `DRIVE_SECRET_ARN`), so the Lambda configuration shows only an ARN.
+5. **At runtime the Lambda fetches and caches it.**
+   ```python
+   global _token
+   if _token is None:
+       _token = sm.get_secret_value(SecretId=INFLUXDB_SECRET_ARN)["SecretString"]
+   ```
+   Metrics and replay fetch once per container (cold start) and reuse it, keeping calls and cost
+   low. The ETL Lambda fetches on every run — fine, it runs weekly.
+6. **Encryption:** no custom KMS key is set, so Secrets Manager uses the AWS-managed default key.
+
+**Where it's *not* used**
+- **Control-API token** — a Lambda environment variable from Terraform's `random_password`; its
+  value *is* in Terraform state.
+- **Local runs** — the InfluxDB token comes from the local `.env`. Secrets Manager is cloud-only.
+- **Browsers** never get a token: history reads go through `replay_server.py` / `traffic-replay`,
+  which hold it server-side.
+
+**Honest observations**
+- **Wider access than needed.** The InfluxDB grant is on the **shared** role used by ingest, metrics
+  and replay, so `traffic-ingest` can read the token without using it. Strict least privilege would
+  give each Lambda its own role.
+- **No automatic rotation.** A new InfluxDB token is set by hand, and because it's cached, warm
+  Lambdas keep the old one until AWS recycles them or you redeploy.
+- **Recovery window.** The InfluxDB secret keeps a 7-day window, which causes the "destroy → apply
+  fails" problem in `infra/README.md`. The Drive key uses 0 for that reason; the InfluxDB secret
+  could too.
+- **Cost:** about US$0.40 per secret per month plus a tiny per-request charge, which caching keeps
+  negligible.
+
+**Viva one-liner:** "Terraform creates each secret empty and I set the value by hand, so tokens
+never land in Terraform state. Each Lambda's role can read only its own secret, its configuration
+holds just the ARN, and the token is fetched once per container and cached. Browsers never see a
+token because reads go through a server-side proxy."
