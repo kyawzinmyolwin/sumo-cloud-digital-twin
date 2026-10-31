@@ -594,3 +594,68 @@ emitter ──sendmessage──► API Gateway ──► traffic-ingest
 **Viva one-liner:** "API Gateway only knows connection ids, so the ingest Lambda keeps them in
 DynamoDB; on every snapshot it scans the table and posts to each id except the sender, deleting any
 that have gone away."
+
+## Q12. How is the scenario comparison built, step by step?
+
+**The idea is a controlled experiment:** run the same simulation twice, changing only the incident,
+label every stored metric with the run's name, then pull the two runs back out and line them up on
+the simulation clock.
+
+**Step 1 — Define the scenarios as named presets.** Designed in
+`scripts/scenarios/DECISION_SUPPORT_DESIGN.md`, implemented in `PRESETS` in `control_server.py`:
+- `baseline_am` — the calibrated morning peak, no incident.
+- `crash_arterial` — the *same* arguments plus `--close-edge 770109405#0@23700:24300` (a major
+  arterial closed 06:35–06:45).
+
+Both start from the shared `_COMMON` argument list, so they can't drift apart.
+
+**Step 2 — Make the runs comparable.**
+- Same window: `--jump-to 23400 --end 27000` (06:30–07:30).
+- Same demand: the same `.rou.xml` built from the council counts.
+- Same randomness: SUMO uses a fixed default random seed unless told to randomise, and neither the
+  config nor `run_traci.py` turns that on.
+
+So **the only difference between the two runs is the incident**.
+
+**Step 3 — Label everything with `scenario_id`, end to end.** `run_traci.py --scenario-id …` → the
+emitter puts `scenarioId` in every snapshot → `compute_tick_metrics()` carries it → stored as the
+InfluxDB **tag** `scenario_id`, in both `metrics_writer.py` (local) and the `traffic-metrics` Lambda
+(cloud). Tags are indexed, so filtering by scenario is fast and cheap.
+
+**Step 4 — Run both and store them.** Click the two Start buttons in turn, or run
+`scripts/run_scenarios.py`, which runs the pair back to back (they share ports) and starts the metrics
+writer for each.
+
+**Step 5 — Query one scenario at a time, safely.** The Compare panel calls the replay API with
+`&scenario=<name>`. The value is checked against `^[A-Za-z0-9_.:-]{1,64}$` and rejected otherwise, and
+only then added to the Flux query as `filter(r.scenario_id == "…")` — this blocks query injection. The
+cloud replay Lambda has the same check.
+
+**Step 6 — Line the runs up on the simulation clock.** The runs happen at different real times
+(say 10:00 and 10:15), so plotting by timestamp puts them side by side, not on top of each other.
+For each scenario the panel also fetches the `simTime` series; `_toSimXY()` joins each metric point
+to its `simTime` by timestamp and plots it at `x = simTime`. Both lines now share the 06:30 → 07:30
+axis, so the crash dip shows up at 06:35.
+
+**Step 7 — One-line summary.** `renderCompareSummary()` shows each run's **mean**, the **% change**
+from A to B, and a direction word that knows which way is bad per metric (speed drop = worse,
+congestion rise = worse). See Q7 for why "better" can mislead.
+
+**Step 8 — Impact report.** `computeImpact()` fetches **raw points** (not averaged buckets, so peaks
+survive) for avg speed, congestion, stopped vehicles and vehicles in the network, and compares **mean
+and peak** per run, coloured red/green. It uses per-run totals, so no time alignment is needed.
+
+```
+PRESETS ──► run baseline_am ──┐                         ┌─► scenario=baseline_am ──┐
+            run crash_arterial ┴► snapshots → metrics → InfluxDB (tag scenario_id) ┤                          ├─► align on simTime → overlay chart
+                                                         └─► scenario=crash_arterial ┘    summary (% change) + impact report
+```
+
+**Limits to state honestly:**
+- **Averages dilute short incidents** — a 10-minute closure averaged over 60 minutes looks small;
+  hence peaks in the impact report and the shape-over-time chart.
+- **Held-back vehicles can make an incident look "better"** — SUMO keeps vehicles waiting at their
+  entry point when the network is jammed, and they don't count as on the road. Read congestion with
+  vehicle counts (Q7).
+- **One run per scenario** — reproducible (fixed seed) but a single sample. Several seeds with a
+  reported range would be more rigorous.
