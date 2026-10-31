@@ -210,18 +210,21 @@ research EC2 sim host (or Fargate tasks) cost money only while they run.
 
 ## Tearing the research copy down
 
-This is where a separate account pays off: you can destroy freely. To make the destroy complete in
-one go:
+This is where a separate account pays off: you can destroy freely. Use
+[`infra/teardown.sh`](../infra/teardown.sh) so the destroy completes in one go. It
+refuses to run unless your credentials belong to the account you name, empties both S3
+buckets (including every version of the versioned dashboard bucket), runs
+`terraform destroy`, then force-deletes both secrets so their names are free at once.
 
-1. Set `recovery_window_in_days = 0` on the InfluxDB secret in `infra/storage.tf` and `apply` — or,
-   after destroying, run
-   `aws secretsmanager delete-secret --secret-id <name> --force-delete-without-recovery`.
-   Otherwise a re-apply within 7 days fails because the name is still reserved.
-2. **Empty both S3 buckets.** Neither has `force_destroy`. The dashboard bucket is **versioned**, so
-   delete all object versions (the S3 console's **Empty** button does this); a plain
-   `aws s3 rm --recursive` leaves old versions behind.
-3. `terraform destroy`.
-4. Keep or delete the research state bucket and lock table, and (if you're finished with it) close
-   the research account.
+```bash
+cd ~/research/sumo-cloud-digital-twin
+export AWS_PROFILE=research
+export TEARDOWN_PROTECTED_ACCOUNTS=<DEMO_ACCOUNT_ID>   # belt and braces: never the demo
+./infra/teardown.sh --expect-account <RESEARCH_ACCOUNT_ID> --dry-run
+./infra/teardown.sh --expect-account <RESEARCH_ACCOUNT_ID> --backup ~/research-backup
+```
+
+Afterwards, keep or delete the research state bucket and lock table, and (if you're
+finished with it) close the research account.
 
 The demo account is not involved at any step.
