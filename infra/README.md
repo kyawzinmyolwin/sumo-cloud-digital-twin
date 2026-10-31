@@ -35,6 +35,9 @@ The metrics Lambda stores **aggregated metrics, not vehicle positions**, so repl
 drives the charts, not the map markers. For a fuller, port-by-port picture, see
 [`../docs/SYSTEM_FLOW.md`](../docs/SYSTEM_FLOW.md).
 
+To experiment without risking this deployment, stand up an isolated copy in a separate AWS
+account: see [`../docs/RESEARCH_ENV.md`](../docs/RESEARCH_ENV.md).
+
 ## What's in here
 
 | File | What it creates |
@@ -235,12 +238,26 @@ only for signed/internal calls.
 
 ## Tear down
 
+Just the hourly-billed piece:
+
 ```bash
-terraform apply -var 'sim_host_enabled=false'   # just the hourly-billed piece
-terraform destroy                               # everything (read the Secrets Manager gotcha first)
+terraform apply -var 'sim_host_enabled=false'
 ```
 
-If you're fully done, delete the state bucket and lock table by hand.
+Everything: use **`teardown.sh`**, not a bare `terraform destroy`. A bare destroy stops
+half-way here (neither S3 bucket has `force_destroy`, the dashboard bucket is versioned,
+and the InfluxDB secret's 7-day recovery window blocks a re-apply). The script checks
+you're in the account you named, empties both buckets (every version), destroys, then
+force-deletes the secrets:
+
+```bash
+export TEARDOWN_PROTECTED_ACCOUNTS=<demo-account-id>     # optional: never allow this one
+./infra/teardown.sh --expect-account <account-id> --dry-run              # see the plan
+./infra/teardown.sh --expect-account <account-id> --backup ~/twin-backup # do it
+```
+
+It leaves the state bucket and lock table (delete them by hand if you're fully done) and
+the InfluxDB bucket (managed in InfluxDB Cloud).
 
 ## Cost
 
