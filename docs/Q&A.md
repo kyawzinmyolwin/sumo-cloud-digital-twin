@@ -216,7 +216,9 @@ The metrics step is the clearest example. The actual computation is one pure fun
   `metrics_writer.py`, a long-running process that reads the WebSocket feed and writes to
   local InfluxDB.
 
-So there is no duplicated or diverging logic — just two runtimes for one function.
+So the logic is identical today, but it lives in **two copies**: the Lambda bundles its own
+copy of `metrics.py`, which must be kept in sync with `scripts/metrics.py` by hand. (A single
+shared package used by both would remove that risk.)
 
 ### Why a different host in each environment
 
@@ -231,9 +233,10 @@ So there is no duplicated or diverging logic — just two runtimes for one funct
    simpler: no API Gateway, no cold-start latency, no per-invoke overhead, nothing to
    emulate.
 3. **The design deliberately separates pure logic from its runtime.** Because
-   `compute_tick_metrics` is a pure, unit-tested function, the *same* code is hosted by a
-   serverless function in the cloud and a long-running process locally, and both produce
-   **identical metrics**. That is what makes the two pipelines interchangeable.
+   `compute_tick_metrics` is a pure, unit-tested function, the same code (one function,
+   two copies) is hosted by a serverless function in the cloud and a long-running process
+   locally, and both produce **identical metrics as long as the copies match**. That is
+   what makes the two pipelines interchangeable.
 
 ### The full local ↔ cloud mapping
 
@@ -244,13 +247,52 @@ So there is no duplicated or diverging logic — just two runtimes for one funct
 | History / replay read API | `traffic-replay` Lambda | `replay_server.py` (stdlib HTTP server) |
 | Time-series store | InfluxDB Cloud | InfluxDB container |
 
+### "Local writes to InfluxDB directly — so why can't the cloud do it without Lambda?"
+
+Both paths **do** write directly. Locally, `metrics_writer.py` reads the snapshot from the
+WebSocket, computes the metrics and sends them to the container at `localhost:8086`. In the
+cloud, the `traffic-metrics` Lambda **is** that direct writer — it does exactly the same job
+and sends to InfluxDB Cloud. The real question is **what runs the writing code**.
+
+Writing a metric takes code, not just forwarding: receive the snapshot → aggregate it
+(`compute_tick_metrics`) → format InfluxDB line protocol → send it with the database token.
+
+| | Local | Cloud |
+|---|---|---|
+| Who runs that code | `metrics_writer.py`, a process you start and leave running | `traffic-metrics` Lambda |
+| When it runs | All the time, while the process is up | Only when a snapshot arrives |
+| Where InfluxDB is | Docker container, `localhost:8086` | InfluxDB Cloud (public HTTPS) |
+| Where the token lives | Local `.env` | Secrets Manager |
+
+- **API Gateway can't do it alone.** It only receives messages and passes them on; it can't
+  aggregate, convert JSON to line protocol, or safely add the token. Locally your always-running
+  process does that work; in AWS there is no always-running process of yours unless you pay for
+  one, and **Lambda is code that runs only when a message arrives**.
+- **The cloud can't use the local container.** It lives on your machine, which isn't reachable
+  from the internet, and `localhost` inside a Lambda is the Lambda itself — hence InfluxDB Cloud.
+
+**Could the cloud skip Lambda? Yes, two ways, each with a cost:**
+1. **The producer writes to InfluxDB Cloud itself** — run `metrics_writer.py` next to the emitter
+   with `--influx-url`/`--token` pointed at the cloud. It works, but the database token then sits
+   on every producer machine instead of in Secrets Manager, every producer needs an extra process
+   (the "forgot the writer, history is empty" trap returns), and storage becomes the producer's job.
+2. **An always-on server runs `metrics_writer`** listening to the WebSocket API — also works, but it
+   costs money around the clock and needs patching, which breaks the ~US$1–2/month idle target.
+
+Lambda avoids both: any producer's metrics are stored automatically, the token stays in AWS, and
+you pay only per snapshot.
+
+**Viva one-liner:** "Both paths write directly to InfluxDB. The difference is what runs the writing
+code: locally a process I keep running, in AWS a Lambda that runs only when a snapshot arrives,
+because API Gateway can only pass messages on, not process them."
+
 **Framing for the viva:** this is a *separation of concerns* — application logic
 (pure functions) vs. the infrastructure that hosts it. The cloud uses serverless Lambda
 because it is cost-efficient and auto-scaling for an intermittent public pipeline; the
 local stack uses a long-running process because, on a single already-running machine, that
-is the simplest right-sized host. Sharing `compute_tick_metrics` across both guarantees the
-local and cloud results match, which is also why the metrics are tested once and trusted
-everywhere.
+is the simplest right-sized host. Using the same `compute_tick_metrics` in both (kept in sync)
+means the local and cloud results match, and the shared logic is unit-tested once in
+`scripts/metrics.py`.
 
 ---
 
