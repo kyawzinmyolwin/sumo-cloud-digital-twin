@@ -93,6 +93,29 @@ _Updated 2026-10-03._
       ~30–40 ms from NZ is inherent. Diagnose by symptom: choppy motion → (1); view running
       behind real-time → (2); periodic freezes → Lambda cold-start/GC. (1)+(2) are safe local
       changes (~1–2h); (3) is ~4–6h.
+- [ ] **Move the cloud sim host from EC2 to ECS Fargate (~8–12h incl. live-AWS testing).**
+      Lambda can't run the simulation (15-min limit, no long-lived state, can't accept incoming
+      connections); Fargate runs containers with no time limit and no server to manage.
+      **Why:** billed only while a run is going (the container exits at `--end`, so no forgotten
+      VM); `/start` can *launch* a run instead of needing a running host; no OS patching; several
+      scenarios can run in parallel (e.g. baseline + crash at once). **Keep EC2 for the
+      submission** — it's built, verified and in the report; present Fargate as the next step.
+      **Changes:** (1) build `docker/sim.Dockerfile` into an image and push to ECR (could be a
+      GitHub Actions job); (2) replace `infra/sim_host.tf` + `sim_host_userdata.sh.tftpl` with an
+      ECS cluster, task definition (scenario args as command overrides), task + execution IAM
+      roles, security group and log group; (3) in `infra/functions/traffic_control/`, swap
+      `ssm:SendCommand` for `ecs:RunTask` / `ecs:StopTask`, keeping the preset allowlist and edge
+      validation; (4) update the IAM policy and `docs/CLOUD_CONTROL.md`. **Gotchas:** run the task
+      in a **public subnet with a public IP and no inbound rules** — a NAT gateway alone costs
+      ~US$40+/month; **bake the network + demand files into the image** (Compose bind-mounts the
+      ~0.6 GB data tree today) or fetch them from S3 at startup; every run is a **cold start**
+      (provision + image pull, tens of seconds to a minute), slower than a scenario switch on a
+      warm EC2 host; **parallel runs share one live map** — both producers fan out on the same
+      WebSocket API, so the map would need to filter by `scenarioId` (metrics stay separate by
+      `scenario_id`); **Fargate Spot** is much cheaper but can be interrupted mid-run (fine for
+      metric collection, risky in a live demo); debugging needs CloudWatch Logs or ECS Exec instead
+      of an SSM shell. Hourly cost is roughly similar to a t3.medium for a comparable size — the
+      saving comes from not paying between runs.
 
 ### Deferred by choice (not scheduled)
 - [ ] Incident rerouting / detours (~6–9h)
