@@ -35,6 +35,9 @@ The metrics Lambda stores **aggregated metrics, not vehicle positions**, so repl
 drives the charts, not the map markers. For a fuller, port-by-port picture, see
 [`../docs/SYSTEM_FLOW.md`](../docs/SYSTEM_FLOW.md).
 
+To experiment without risking this deployment, stand up an isolated copy in a separate AWS
+account: see [`../docs/RESEARCH_ENV.md`](../docs/RESEARCH_ENV.md).
+
 ## What's in here
 
 | File | What it creates |
