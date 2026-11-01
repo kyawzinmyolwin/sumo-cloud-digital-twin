@@ -62,11 +62,18 @@ Terraform: `infra/control_api.tf` (+ `infra/functions/traffic_control/`,
    terraform output -raw control_api_token
    ```
 
-3. **Point the hosted dashboard at it** by adding URL parameters:
+3. **Point the hosted dashboard at it.** Build the full URL from the Terraform outputs
+   (run in `infra/`):
+   ```bash
+   echo "$(./dashboard_url.sh)&control=$(terraform output -raw control_api_url)&token=$(terraform output -raw control_api_token)"
    ```
-   https://<cloudfront-domain>/scripts/intersection_map.html?ws=<wss API>&replay=<replay API>/metrics&control=<control_api_url>&token=<control_api_token>
+   which produces:
    ```
-   (`deploy_dashboard.sh` already wires `ws`/`replay`; append `&control=…&token=…`.)
+   <dashboard_url>/intersection_map.html?ws=<websocket_url>&replay=<replay_api_url>&counts=<counts_api_url>&edges=/edges.geojson&control=<control_api_url>&token=<control_api_token>
+   ```
+   `dashboard_url` already starts with `https://`, the page sits at the site root, and
+   `replay_api_url` already ends in `/metrics`. Keep this link private (it carries the
+   token); `./dashboard_url.sh` alone gives the shareable view-only URL.
 
 4. In the **Scenario control** panel, click a Start button (or click a road → **Start road
    block**). The live feed connects automatically; History/Compare fill from InfluxDB.
