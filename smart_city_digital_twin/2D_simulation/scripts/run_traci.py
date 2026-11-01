@@ -105,6 +105,20 @@ def _should_stop(traci, args) -> bool:
     return traci.simulation.getMinExpectedNumber() <= 0 and t >= (args.jump_to or 0)
 
 
+def _close_quietly(traci) -> None:
+    """Close TraCI on shutdown, tolerating a connection Ctrl-C left mid-command.
+
+    A KeyboardInterrupt can land half-way through a TraCI request, leaving unread
+    reply bytes on the socket. The close command then reads those as its status and
+    traci raises (e.g. KeyError on an unknown status byte). SUMO is going away anyway
+    at that point, so there's nothing left to clean up — report it and move on.
+    """
+    try:
+        traci.close()
+    except Exception as exc:  # noqa: BLE001 - shutdown must not turn a clean stop into a traceback
+        print(f"(TraCI connection was already closing: {type(exc).__name__}; ignored)")
+
+
 def _net_path_for(args) -> Path:
     """The net file the emitter must use for XY -> WGS84 conversion.
 
@@ -430,7 +444,7 @@ def main() -> int:
     except KeyboardInterrupt:
         print("\nStopped by user.")
     finally:
-        traci.close()
+        _close_quietly(traci)
 
     return 0
 
