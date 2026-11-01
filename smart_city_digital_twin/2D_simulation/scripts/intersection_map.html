@@ -729,6 +729,7 @@
   function setPaused(next) {
     paused = next;
     if (btnPause) btnPause.textContent = paused ? "Resume" : "Pause";
+    setWsStatus(paused ? "paused (view frozen)" : "connected", !paused);
     sendSimControl(paused ? "pause" : "resume");
   }
 
@@ -921,11 +922,8 @@
 
   btnConnect.addEventListener("click", connectWs);
   btnDisconnect.addEventListener("click", disconnectWs);
-  btnPause.addEventListener("click", function () {
-    paused = !paused;
-    btnPause.textContent = paused ? "Resume" : "Pause";
-    setWsStatus(paused ? "paused (view frozen)" : "connected", !paused);
-  });
+  // (Pause is wired once, above, via setPaused — a second listener here used to
+  // toggle it straight back, so clicking Pause appeared to do nothing.)
 
   // Best-effort auto-connect on page load — silently falls back to
   // "disconnected" if run_traci.py --emit isn't running yet. Click Connect
