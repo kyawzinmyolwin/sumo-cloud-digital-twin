@@ -2,11 +2,15 @@
 traffic-ingest — WebSocket API Gateway handler.
 
 Routes (selected by the "action" field of the message body):
-  $connect     record the connectionId so we can broadcast to it later
+  $connect     record the connectionId (and its role) so we can broadcast to it later
   $disconnect  forget the connectionId
   sendmessage  the producer channel: fan the snapshot out to every connected
                browser, and async-invoke traffic-metrics to store it
   $default     anything else — ignored
+
+Roles: the emitter's CloudForwarder connects with ``?role=producer``; anyone else is
+a viewer. Snapshots go to viewers only, and the control Lambda looks up producers to
+deliver live close/reopen commands.
 
 Message shape the emitter sends on sendmessage:
   {"action": "sendmessage", "data": { ...emitter snapshot... }}
@@ -28,15 +32,32 @@ _table = _ddb.Table(CONNECTIONS_TABLE)
 _lambda = boto3.client("lambda")
 
 
+def connection_item(connection_id, query, now):
+    """DynamoDB row for a new connection: ``role`` is "producer" only when the client
+    connected with ?role=producer, otherwise "viewer"."""
+    role = "producer" if (query or {}).get("role") == "producer" else "viewer"
+    return {
+        "connectionId": connection_id,
+        "role": role,
+        "expireAt": int(now) + CONNECTION_TTL_SECONDS,
+    }
+
+
+def fanout_targets(items, skip=None):
+    """Connection ids that should receive a snapshot: every viewer except the sender.
+    Producers are skipped — they send snapshots, they don't watch them. Rows written
+    before roles existed have no role and count as viewers."""
+    return [i["connectionId"] for i in items
+            if i.get("connectionId") and i["connectionId"] != skip and i.get("role") != "producer"]
+
+
 def lambda_handler(event, context):
     route = event.get("requestContext", {}).get("routeKey")
     connection_id = event.get("requestContext", {}).get("connectionId")
 
     if route == "$connect":
-        _table.put_item(Item={
-            "connectionId": connection_id,
-            "expireAt": int(time.time()) + CONNECTION_TTL_SECONDS,
-        })
+        _table.put_item(Item=connection_item(
+            connection_id, event.get("queryStringParameters"), time.time()))
         return {"statusCode": 200}
 
     if route == "$disconnect":
@@ -76,11 +97,10 @@ def _broadcast(event, message, skip=None):
     endpoint = f"https://{rc['domainName']}/{rc['stage']}"
     api = boto3.client("apigatewaymanagementapi", endpoint_url=endpoint)
 
-    scan = _table.scan(ProjectionExpression="connectionId")
-    for item in scan.get("Items", []):
-        cid = item["connectionId"]
-        if cid == skip:
-            continue
+    # "role" is a DynamoDB reserved word, hence the #r placeholder.
+    scan = _table.scan(ProjectionExpression="connectionId, #r",
+                       ExpressionAttributeNames={"#r": "role"})
+    for cid in fanout_targets(scan.get("Items", []), skip=skip):
         try:
             api.post_to_connection(ConnectionId=cid, Data=message.encode("utf-8"))
         except api.exceptions.GoneException:

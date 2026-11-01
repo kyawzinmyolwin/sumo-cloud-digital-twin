@@ -47,22 +47,15 @@ _Updated 2026-10-03._
 - [ ] CV / LinkedIn write-up
 
 ### Planned improvements (to add later)
-- [ ] **Cloud live-inject ("Close live" over the cloud).** Today "Close live" /
-      "Reopen road" (inject into the *running* sim) is local-only — the cloud emitter runs
-      forward-only (`--emit-target`, no local WS/`ControlInbox`) and the cloud feed is
-      one-way fan-out, so there's no back-channel to the running sim. To support it: add a
-      control route on the WebSocket API (or drive injection through the HTTP control API)
-      **and** have the producer hold/read an inbound connection that applies
-      `incident_from_control` each tick on the sim host. **Concrete approach (~8–12h):**
-      browser → `POST /inject?edge=` (token) → control Lambda `postToConnection()` to the
-      producer's WS connection (API Gateway WS is bidirectional); the emitter's
-      `CloudForwarder` reads inbound frames into a control inbox that `run_traci` drains each
-      tick → `IncidentController`. New bits: producer-side inbound read; register the
-      producer's connectionId by role on `$connect` (re-register on reconnect, in the
-      connections table); the `/inject` route + `execute-api:ManageConnections` IAM on the
-      control Lambda. Reuses `incidents.py`, the auth token and the connections table. Needs
-      live-AWS testing (reconnect edge-cases). Cloud workaround today is **Start road block**
-      (fresh run with the edge closed). See `docs/Q&A.md` Q3.
+- [~] **Cloud live-inject ("Close live" over the cloud) — BUILT, pending a live-AWS test.**
+      Implemented as planned: browser → `POST /inject?edge=` / `POST /reopen` (token) →
+      `traffic-control` λ → `post_to_connection` to the producer (the emitter connects as
+      `?role=producer`, recorded by `traffic-ingest`) → `CloudForwarder` reader → `ControlInbox`
+      → `run_traci` → `IncidentController`. Unit tests, a headless-browser check of the dashboard
+      and a real-WebSocket check of the producer pass. **To finish:** deploy to the research
+      account, run the sim from a ref with this code, and confirm a road closes and reopens on the
+      hosted dashboard. Known gap: the producer role isn't authenticated (see
+      `docs/CLOUD_CONTROL.md` → Limitations).
 - [ ] **More scenario comparisons — unique per-edge road-block id + extra presets.**
       (1) Tag each click-a-road closure with a **unique `scenario_id` per edge** (e.g.
       `rb_<sanitised-edge>`, stripping chars not in the scenario filter `[A-Za-z0-9_.:-]`)

@@ -85,6 +85,9 @@ flowchart LR
   SCN -->|"HTTPS + Bearer token"| CAPI
   CNT -->|"HTTPS ?counts="| QAPI
   SSM -->|"rewrite env + restart"| RT
+  CTRL -.->|"live close: find producer"| DDB
+  CTRL -.->|"live close: post_to_connection"| WSAPI
+  WSAPI -.->|"control frame (role=producer)"| CF
   S3H -->|"HTTPS static + data"| DASH
   MET -.->|"InfluxDB token"| SEC
   REP -.->|"InfluxDB token"| SEC
@@ -144,7 +147,7 @@ flowchart LR
 | ③ | control: CAPI → authorizer → control λ → SSM | Start/Stop does nothing (hosted) | `?control=<api>&token=<token>`; token matches; sim host **already running** (/start switches scenario, doesn't boot EC2) |
 | ③ | S3 + CloudFront host | "Could not load intersection_geo.csv" / 404 | `deploy_dashboard.sh` uploads HTML + `edges.geojson` + `data/output/intersection_geo.csv`; invalidate CloudFront |
 | ④ | live map lag / choppy | perceived "laggy" | not CloudFront — it's render + message rate; canvas renderer + lower `--speed` (see CHECKLIST "Live-feed latency") |
-| ④ | Close/Reopen live | click does nothing | **local path only** (cloud uses "Start road block"); emitter has `ControlInbox`; command is `{action:"incident"/"reopen"}` over WS :8765 |
+| ④ | Close/Reopen live | click does nothing | **local feed:** command goes up WS :8765 into `ControlInbox`. **Cloud feed:** page needs `&control=…&token=…`; `/inject` 409 = no sim connected; sim host log should show `cloud control received` |
 | ④ | Compare "better/worse" looks wrong | crash shows *lower* congestion | not a bug — insertion backlog; read congestion with throughput (see `docs/Q&A.md` Q7) |
 | ⑤ | Drive → drive_client (HTTPS) | ingest finds no files | Drive folder public; API key valid; manifest change-detection (only new/changed downloaded) |
 | ⑤ | counts_etl parse | a workbook "rejected" | expected for non-vehicle files (pedestrian/template) — rejection is by design, not a crash |

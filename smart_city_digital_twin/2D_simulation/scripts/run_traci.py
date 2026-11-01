@@ -168,15 +168,16 @@ async def _run_emitting(traci, args, controller=None) -> None:
     broadcaster = None
     server = None
     forwarder = None
-    inbox = None
+    # One inbox for live click-to-inject commands, whether they come from a local
+    # browser (--emit) or from the cloud control API via the forwarder (--emit-target).
+    inbox = ControlInbox() if (args.emit or args.emit_target) else None
     if args.emit:
         broadcaster = Broadcaster()
-        inbox = ControlInbox()            # dashboard → here: live click-to-inject commands
         server = await serve(broadcaster, args.emit_host, args.emit_port, inbox)
         print(f"Emitter live on ws://{args.emit_host}:{args.emit_port} (sim id: {args.sim_id})")
     if args.emit_target:
-        forwarder = CloudForwarder(args.emit_target)
-        print(f"Forwarding snapshots to {args.emit_target}")
+        forwarder = CloudForwarder(args.emit_target, inbox=inbox)
+        print(f"Forwarding snapshots to {forwarder.url} (listening for live control)")
 
     step = 0
     # Real-time pacing: anchor wall-clock to sim time so playback tracks the clock

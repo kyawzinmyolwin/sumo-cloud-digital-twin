@@ -82,6 +82,20 @@ resource "aws_iam_role_policy" "control_inline" {
         Effect   = "Allow"
         Action   = ["ssm:GetParameter", "ssm:PutParameter"]
         Resource = "arn:aws:ssm:${var.aws_region}:*:parameter/${var.project}/${var.environment}/sim-control/*"
+      },
+      {
+        # Live close/reopen: find the producer's connection (read-only scan)...
+        Sid      = "FindProducerConnection"
+        Effect   = "Allow"
+        Action   = ["dynamodb:Scan"]
+        Resource = aws_dynamodb_table.connections.arn
+      },
+      {
+        # ...and push the command to it over the WebSocket API (this stage only).
+        Sid      = "PushLiveCommandToProducer"
+        Effect   = "Allow"
+        Action   = "execute-api:ManageConnections"
+        Resource = "${aws_apigatewayv2_api.ws.execution_arn}/${aws_apigatewayv2_stage.prod.name}/POST/@connections/*"
       }
     ]
   })
@@ -111,10 +125,15 @@ resource "aws_lambda_function" "control" {
   timeout          = 20
   memory_size      = 128
 
+  # CONNECTIONS_TABLE + WS_MANAGEMENT_ENDPOINT serve the live close/reopen routes:
+  # where producers are registered, and the WebSocket API's management endpoint
+  # (the https:// form of the wss:// stage URL).
   environment {
     variables = {
-      SIM_HOST_TAG = "${local.name_prefix}-sim-host"
-      STATE_PARAM  = "/${var.project}/${var.environment}/sim-control/state"
+      SIM_HOST_TAG           = "${local.name_prefix}-sim-host"
+      STATE_PARAM            = "/${var.project}/${var.environment}/sim-control/state"
+      CONNECTIONS_TABLE      = aws_dynamodb_table.connections.name
+      WS_MANAGEMENT_ENDPOINT = replace(aws_apigatewayv2_stage.prod.invoke_url, "wss://", "https://")
     }
   }
 }
@@ -175,7 +194,10 @@ resource "aws_lambda_permission" "control_authorizer_invoke" {
 }
 
 locals {
-  control_routes = ["GET /scenarios", "GET /status", "POST /start", "POST /stop", "POST /start_roadblock"]
+  control_routes = [
+    "GET /scenarios", "GET /status", "POST /start", "POST /stop", "POST /start_roadblock",
+    "POST /inject", "POST /reopen",
+  ]
 }
 
 resource "aws_apigatewayv2_route" "control" {

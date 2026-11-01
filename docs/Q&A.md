@@ -165,6 +165,11 @@ That is why the cloud path is preset-only while the local CLI is unrestricted.
 
 ## Q3. Why doesn't "Close live" work in the cloud demo?
 
+> **Update:** live Close/Reopen over the cloud is now implemented (`POST /inject` and
+> `POST /reopen` on the control API; see `docs/CLOUD_CONTROL.md`). The answer below explains why
+> the original deployment couldn't do it — exactly the gap that work closed — and still applies to
+> any deployment running the older code.
+
 **It is expected, not a bug — "Close live" is local-only by design.**
 
 "Close live" (and its "Reopen road (resume)" toggle) injects a closure into the
@@ -508,9 +513,10 @@ the cloud uses *Start road block* instead.
 - **Open-ended by design** — a live click closes the road until you reopen (no hidden timer), matching
   the toggle UX; a timed closure is the same mechanism with an `end`.
 
-**Scope:** local `--emit` path only. The cloud feed is one-way fan-out (forward-only `--emit-target`),
-so live click-to-inject over AWS is a deferred build (Q3 / CHECKLIST "Planned improvements"); the cloud
-equivalent today is **Start road block**, which starts a fresh run with the edge closed from the start.
+**Scope:** this describes the local `--emit` path. The cloud feed now has an equivalent: the dashboard
+calls `POST /inject` / `POST /reopen` on the authenticated control API, which pushes the same command to
+the emitter's own cloud connection, where it lands in the same `ControlInbox` (see
+`docs/CLOUD_CONTROL.md`). **Start road block** remains for closures from the start of a run.
 
 ## Q9. Locally `run_traci.py --emit` hosts a WebSocket server. Why does the AWS version need the emitter to be a WebSocket *client* (`--emit-target`)?
 
@@ -548,11 +554,12 @@ AWS — API Gateway is the hub
 **Consequences worth stating in the viva:**
 - **The two modes compose.** `--emit` (serve locally) and `--emit-target` (forward to the cloud) can
   run together, so a local map and the hosted map can watch the same run.
-- **It's why "Close live" is local-only (Q3, Q8).** Locally the browser is connected straight to the
-  emitter, so control commands travel back up the same socket. In AWS the browser and the emitter are
-  both clients of API Gateway and fan-out goes only *to* browsers, so there's no path back to the
-  producer. Closing that gap means a Lambda pushing the command to the emitter's connection
-  (`postToConnection`) — the "cloud live-inject" item in CHECKLIST.md.
+- **It's why live Close/Reopen needed extra work in the cloud (Q3, Q8).** Locally the browser is
+  connected straight to the emitter, so control commands travel back up the same socket. In AWS the
+  browser and the emitter are both clients of API Gateway and fan-out goes only *to* browsers, so
+  there's no path back to the producer unless a Lambda pushes to the emitter's own connection
+  (`post_to_connection`). That's how the cloud version works: the emitter connects as
+  `?role=producer`, and the control API's `/inject` / `/reopen` push the command to it.
 
 ## Q10. Why use API Gateway's WebSocket API for the live feed? What were the alternatives, and why weren't they chosen?
 

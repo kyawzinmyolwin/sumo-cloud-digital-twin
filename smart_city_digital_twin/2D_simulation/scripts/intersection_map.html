@@ -1470,10 +1470,35 @@
   function edgesSetStatus(msg) { if (edgesStatus) edgesStatus.textContent = msg; }
 
   // Send a control command up the live WebSocket (local emitter only). Returns
-  // false if not connected. The cloud API Gateway path doesn't read these.
+  // false if not connected.
   function sendControl(obj) {
     if (!ws || ws.readyState !== WebSocket.OPEN) return false;
     try { ws.send(JSON.stringify(obj)); return true; } catch (e) { return false; }
+  }
+
+  // Live Close/Reopen goes up the WebSocket on a local feed (ws://), or through the
+  // authenticated cloud control API (POST /inject, /reopen) on the cloud feed
+  // (wss://), which pushes the command to the running sim. Resolves {ok, msg}.
+  function onCloudFeed() { return !!(ws && ws.url && ws.url.indexOf("wss://") === 0); }
+  async function liveControl(kind, edgeId) {   // kind: "close" | "reopen"
+    if (!onCloudFeed()) {
+      const ok = sendControl(kind === "close"
+        ? { action: "incident", type: "close_edge", edge: edgeId }
+        : { action: "reopen" });
+      return ok ? { ok: true } : { ok: false, msg: "not connected to a live emitter (Connect first)" };
+    }
+    if (!CONTROL_TOKEN) {
+      return { ok: false, msg: "cloud feed: add ?control=<control API>&token=<token> to the URL to close roads live" };
+    }
+    try {
+      const path = kind === "close" ? "/inject?edge=" + encodeURIComponent(edgeId) : "/reopen";
+      const resp = await scnFetch(path, { method: "POST" });
+      const body = await resp.json().catch(function () { return {}; });
+      if (resp.ok) return { ok: true };
+      return { ok: false, msg: body.error || body.message || ("control API returned HTTP " + resp.status) };
+    } catch (e) {
+      return { ok: false, msg: "control API unreachable: " + e.message };
+    }
   }
 
   let liveBlocked = false;   // is a live road block currently active (toggle state)
@@ -1524,22 +1549,31 @@
       const st = function () { return document.getElementById("live-status"); };
       function paint() { btn.textContent = liveBlocked ? "Reopen road (resume)" : "Close live"; }
       paint();
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", async function () {
+        btn.disabled = true;                     // one request at a time
         if (!liveBlocked) {
           // close this edge in the RUNNING sim, open-ended — reopen is manual
-          const ok = sendControl({ action: "incident", type: "close_edge", edge: id });
-          if (!ok) { st().textContent = "not connected to a live emitter (Connect first; local ws only)"; return; }
-          liveBlocked = true; paint();
-          markBlocked(id);                       // show the closed road on the map
-          st().textContent = "closed " + id + " live — click again to reopen";
+          const r = await liveControl("close", id);
+          if (r.ok) {
+            liveBlocked = true;
+            markBlocked(id);                     // show the closed road on the map
+            st().textContent = "closed " + id + " live — click again to reopen";
+          } else {
+            st().textContent = r.msg;
+          }
         } else {
           // lift all active live closures; traffic recovers as the queue drains
-          const ok = sendControl({ action: "reopen" });
-          if (!ok) { st().textContent = "not connected to a live emitter"; return; }
-          liveBlocked = false; paint();
-          clearBlocked();                        // reopen lifts all closures
-          st().textContent = "reopened — traffic will recover as the queue drains";
+          const r = await liveControl("reopen");
+          if (r.ok) {
+            liveBlocked = false;
+            clearBlocked();                      // reopen lifts all closures
+            st().textContent = "reopened — traffic will recover as the queue drains";
+          } else {
+            st().textContent = r.msg;
+          }
         }
+        paint();
+        btn.disabled = false;
       });
     };
   }

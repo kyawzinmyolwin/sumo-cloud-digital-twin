@@ -17,6 +17,7 @@ touches traci itself except through the object handed to ``serialize_vehicles``.
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import time
 from typing import Any, Iterable
@@ -140,6 +141,32 @@ class ControlInbox:
         return out
 
 
+# Live control actions the stepping loop understands (close a road / lift closures).
+CONTROL_ACTIONS = frozenset({"incident", "reopen"})
+
+
+def control_command(raw: Any) -> "dict[str, Any] | None":
+    """Parse one inbound WebSocket frame; return it if it's a live control command
+    (``{"action": "incident", ...}`` or ``{"action": "reopen"}``), else None.
+    Shared by the local server and the cloud forwarder so both accept the same set."""
+    try:
+        msg = json.loads(raw)
+    except Exception:  # noqa: BLE001 - ignore malformed frames
+        return None
+    if isinstance(msg, dict) and msg.get("action") in CONTROL_ACTIONS:
+        return msg
+    return None
+
+
+def producer_url(url: str) -> str:
+    """Tag the outbound cloud connection as the producer (``?role=producer``) so the
+    ingest Lambda doesn't echo snapshots back to it and the control Lambda can find
+    it to deliver live commands."""
+    if "role=producer" in url:
+        return url
+    return url + ("&" if "?" in url else "?") + "role=producer"
+
+
 async def serve(broadcaster: Broadcaster, host: str, port: int, inbox: "ControlInbox | None" = None):
     """Start the WebSocket server and return the running server object.
 
@@ -151,8 +178,6 @@ async def serve(broadcaster: Broadcaster, host: str, port: int, inbox: "ControlI
     """
     import websockets
 
-    _CONTROL_ACTIONS = {"incident", "reopen"}
-
     async def handler(ws: Any) -> None:
         broadcaster.register(ws)
         try:
@@ -161,12 +186,9 @@ async def serve(broadcaster: Broadcaster, host: str, port: int, inbox: "ControlI
             async for raw in ws:               # ends when the client disconnects
                 if inbox is None:
                     continue
-                try:
-                    msg = json.loads(raw)
-                except Exception:               # noqa: BLE001 - ignore malformed control frames
-                    continue
-                if isinstance(msg, dict) and msg.get("action") in _CONTROL_ACTIONS:
-                    inbox.add(msg)
+                cmd = control_command(raw)
+                if cmd is not None:
+                    inbox.add(cmd)
         finally:
             broadcaster.unregister(ws)
 
@@ -190,17 +212,37 @@ class CloudForwarder:
     browsers, the emitter dials OUT to the cloud endpoint and posts each tick.
     Resilient by design — a dropped connection is logged and retried on the next
     tick rather than crashing the simulation loop.
+
+    With an ``inbox``, a background reader also listens on the same connection for
+    live control commands the cloud control Lambda pushes to this producer (close a
+    road / reopen) and queues them exactly like the local server does.
     """
 
-    def __init__(self, url: str) -> None:
-        self.url = url
+    def __init__(self, url: str, inbox: "ControlInbox | None" = None) -> None:
+        self.url = producer_url(url)
+        self.inbox = inbox
         self._ws: Any = None
+        self._reader: "asyncio.Task | None" = None
 
     async def _ensure(self) -> None:
         if self._ws is None:
             import websockets
 
             self._ws = await websockets.connect(self.url)
+            if self.inbox is not None:
+                self._reader = asyncio.create_task(self._read(self._ws))
+
+    async def _read(self, ws: Any) -> None:
+        """Queue control commands arriving on ``ws``; ends when the connection drops
+        (send() then reconnects on the next tick and starts a new reader)."""
+        try:
+            async for raw in ws:
+                cmd = control_command(raw)
+                if cmd is not None and self.inbox is not None:
+                    self.inbox.add(cmd)
+                    print(f"cloud control received: {cmd.get('action')}")
+        except Exception:  # noqa: BLE001 - a dropped connection is handled by send()
+            pass
 
     async def send(self, snapshot: dict[str, Any]) -> None:
         payload = wrap_sendmessage(snapshot)
@@ -209,9 +251,15 @@ class CloudForwarder:
             await self._ws.send(payload)
         except Exception as exc:  # noqa: BLE001 — never let a cloud blip stop the sim
             print(f"cloud forward failed ({exc}); will reconnect next tick")
+            if self._reader is not None:
+                self._reader.cancel()
+                self._reader = None
             self._ws = None
 
     async def close(self) -> None:
+        if self._reader is not None:
+            self._reader.cancel()
+            self._reader = None
         if self._ws is not None:
             try:
                 await self._ws.close()

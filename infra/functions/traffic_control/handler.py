@@ -17,9 +17,17 @@ Routes (mirror control_server.py so the same dashboard panel drives either one):
     POST /start?scenario=<name>
     POST /start_roadblock?edge=<id>&duration=<sec>
     POST /stop
+    POST /inject?edge=<id>&duration=<sec>   live: close a road in the RUNNING sim
+    POST /reopen                            live: lift active live closures
+
+The live routes don't restart anything: they push a control command over the
+WebSocket API to the producer's own connection (the emitter connects with
+?role=producer, recorded by traffic-ingest), and the running sim applies it on its
+next tick — the cloud equivalent of the local dashboard's Close/Reopen.
 
 The pure helpers (scenario_list / args_for_scenario / roadblock_args /
-scenario_args_string) are unit-tested; only the AWS glue needs a live account.
+scenario_args_string / inject_command / producer_ids) are unit-tested; only the AWS
+glue needs a live account.
 """
 from __future__ import annotations
 
@@ -87,6 +95,26 @@ def scenario_args_string(args):
     return " ".join(args)
 
 
+REOPEN_COMMAND = {"action": "reopen"}
+
+
+def inject_command(edge, duration=None):
+    """The live close-road command pushed to the producer. Validates the edge id the
+    same way as a road block; ``duration`` (seconds) makes it self-lifting."""
+    if not _EDGE_RE.match(edge or ""):
+        raise ValueError("invalid edge id %r" % (edge,))
+    cmd = {"action": "incident", "type": "close_edge", "edge": edge}
+    if duration:
+        cmd["duration"] = int(duration)
+    return cmd
+
+
+def producer_ids(items):
+    """Connection ids of producers (emitters) among DynamoDB connection rows."""
+    return [i["connectionId"] for i in items
+            if i.get("role") == "producer" and i.get("connectionId")]
+
+
 # --- AWS glue (clients created lazily so the pure helpers import without creds) ---
 _clients = {}
 
@@ -146,6 +174,29 @@ def _restart_with(args, scenario_label):
     _set_state(scenario_label)
 
 
+def _push_to_producers(cmd):
+    """Deliver ``cmd`` to every connected producer; return how many received it."""
+    if "connections_table" not in _clients:
+        _clients["connections_table"] = boto3.resource("dynamodb").Table(os.environ["CONNECTIONS_TABLE"])
+    if "ws_mgmt" not in _clients:
+        _clients["ws_mgmt"] = boto3.client("apigatewaymanagementapi",
+                                           endpoint_url=os.environ["WS_MANAGEMENT_ENDPOINT"])
+    # "role" is a DynamoDB reserved word, hence the #r placeholder.
+    items = _clients["connections_table"].scan(
+        ProjectionExpression="connectionId, #r",
+        ExpressionAttributeNames={"#r": "role"}).get("Items", [])
+    api = _clients["ws_mgmt"]
+    data = json.dumps(cmd).encode("utf-8")
+    sent = 0
+    for cid in producer_ids(items):
+        try:
+            api.post_to_connection(ConnectionId=cid, Data=data)
+            sent += 1
+        except api.exceptions.GoneException:
+            continue  # stale row; $disconnect / TTL will clear it
+    return sent
+
+
 def _resp(status, body):
     return {"statusCode": status,
             "headers": {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
@@ -197,6 +248,30 @@ def lambda_handler(event, context):
             _send(["systemctl stop %s" % SERVICE])
             _clear_state()
             return _resp(200, {"ok": True, "stopped": True})
+
+        if route == "POST /inject":
+            edge = (q.get("edge") or "").strip()
+            raw = q.get("duration")
+            try:
+                duration = int(raw) if raw not in (None, "", "0") else None
+            except (TypeError, ValueError):
+                return _resp(400, {"ok": False, "error": "bad duration"})
+            try:
+                cmd = inject_command(edge, duration)
+            except ValueError as exc:
+                return _resp(400, {"ok": False, "error": str(exc)})
+            sent = _push_to_producers(cmd)
+            if not sent:
+                return _resp(409, {"ok": False, "error":
+                                   "no live simulation connected — start a run first"})
+            return _resp(200, {"ok": True, "edge": edge, "producers": sent})
+
+        if route == "POST /reopen":
+            sent = _push_to_producers(dict(REOPEN_COMMAND))
+            if not sent:
+                return _resp(409, {"ok": False, "error":
+                                   "no live simulation connected — start a run first"})
+            return _resp(200, {"ok": True, "reopened": True, "producers": sent})
 
         return _resp(404, {"error": "not found", "route": route})
     except Exception as exc:  # noqa: BLE001 - surface the error to the dashboard
