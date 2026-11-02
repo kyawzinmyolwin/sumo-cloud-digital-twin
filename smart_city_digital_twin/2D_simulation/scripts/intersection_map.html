@@ -1484,7 +1484,10 @@
   const DEFAULT_EDGE_STYLE = { color: "#7c3aed", weight: 2, opacity: 0.6 };
   const blockedEdges = {};            // edge id -> true while drawn as closed
   // Presets that close a known edge, so starting them highlights it too.
-  const PRESET_BLOCK_EDGES = { crash_arterial: "770109405#0" };
+  const PRESET_BLOCK_EDGES = {   // edges to highlight when a preset starts (keep in sync with the presets)
+    crash_arterial: ["770109405#0"],
+    roadworks: ["-530438714", "992432618#0", "992432618#1", "235384542", "777406032", "22779530#0"],
+  };
 
   async function ensureEdgesVisible() {
     const ok = await loadEdges();
@@ -1717,7 +1720,7 @@
       if (!data.ok) { scnSet("could not start: " + (data.error || resp.status)); return; }
       scnSet("started " + id + " — connecting…");
       clearBlocked();                                   // fresh run: drop any stale closure
-      if (PRESET_BLOCK_EDGES[id]) markBlocked(PRESET_BLOCK_EDGES[id]);  // highlight a preset's closed edge
+      (PRESET_BLOCK_EDGES[id] || []).forEach(markBlocked);  // highlight a preset's closed / slowed edges
       setTimeout(function () { if (!ws) connectWs(); }, 2500);   // let the emitter bind first
       scnPoll();
     } catch (e) { scnSet("start failed — is the control server running?"); }

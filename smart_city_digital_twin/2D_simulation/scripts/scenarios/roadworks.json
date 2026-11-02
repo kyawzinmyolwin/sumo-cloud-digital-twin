@@ -1,0 +1,11 @@
+{
+  "_comment": "Roadworks preset (control_server 'roadworks', cloud traffic-control 'roadworks', run_scenarios). Inbound Riccarton Avenue toward the CBD (~390 m, 6 edges; ~430 veh in the AM peak) limited to 4 m/s (~14 km/h, a works zone) for the whole 06:30-07:30 run. Edge ids are real ids from Christchurch_Central_City_main_streets.net.xml (traced with sumolib); tests/test_roadworks_preset.py checks they exist.",
+  "incidents": [
+    {"type": "set_speed", "edge": "-530438714",  "speed": 4.0, "start": 23400, "end": 27000, "label": "roadworks: Riccarton Ave inbound"},
+    {"type": "set_speed", "edge": "992432618#0", "speed": 4.0, "start": 23400, "end": 27000, "label": "roadworks: Riccarton Ave inbound"},
+    {"type": "set_speed", "edge": "992432618#1", "speed": 4.0, "start": 23400, "end": 27000, "label": "roadworks: Riccarton Ave inbound"},
+    {"type": "set_speed", "edge": "235384542",   "speed": 4.0, "start": 23400, "end": 27000, "label": "roadworks: Riccarton Ave inbound"},
+    {"type": "set_speed", "edge": "777406032",   "speed": 4.0, "start": 23400, "end": 27000, "label": "roadworks: Riccarton Ave inbound"},
+    {"type": "set_speed", "edge": "22779530#0",  "speed": 4.0, "start": 23400, "end": 27000, "label": "roadworks: Riccarton Ave inbound"}
+  ]
+}

@@ -65,9 +65,9 @@ PRESETS: dict[str, dict] = {
     },
     "roadworks": {
         "label": "Roadworks — reduced speed",
-        "description": "Same morning, a corridor limited to 4 m/s for the run.",
+        "description": "Same morning, Riccarton Ave inbound works zone limited to 4 m/s.",
         "args": _COMMON + ["--scenario-id", "roadworks",
-                           "--incident-file", "scenarios/incident_example.json"],
+                           "--incident-file", "scripts/scenarios/roadworks.json"],
     },
 }
 
